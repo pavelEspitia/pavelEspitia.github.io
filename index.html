@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pavel Espitia — AI + Blockchain Developer</title>
+  <meta name="description" content="Full-stack TypeScript developer building AI-powered tools for Web3. Smart contract security, LLM integrations, and developer tooling.">
+  <meta property="og:title" content="Pavel Espitia — AI + Blockchain Developer">
+  <meta property="og:description" content="Full-stack TypeScript developer building AI-powered tools for Web3.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pavelespitia.github.io">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #09090b;
+      color: #e4e4e7;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fafafa;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #a1a1aa;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #71717a;
+      margin-bottom: 16px;
+    }
+
+    .bio {
+      color: #d4d4d8;
+      font-size: 1rem;
+      max-width: 600px;
+    }
+
+    .bio a {
+      color: #34d399;
+      text-decoration: none;
+    }
+
+    .bio a:hover {
+      text-decoration: underline;
+    }
+
+    .projects {
+      display: grid;
+      gap: 16px;
+    }
+
+    .project {
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project:hover {
+      border-color: #34d399;
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .project-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #fafafa;
+    }
+
+    .project-badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .badge-ts { background: #1e3a5f; color: #60a5fa; }
+    .badge-ai { background: #1a2e1a; color: #34d399; }
+    .badge-web3 { background: #2e1a2e; color: #c084fc; }
+
+    .project-desc {
+      color: #a1a1aa;
+      font-size: 0.9rem;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stack-tag {
+      background: #18181b;
+      border: 1px solid #27272a;
+      color: #a1a1aa;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+    }
+
+    .posts {
+      list-style: none;
+    }
+
+    .posts li {
+      margin-bottom: 12px;
+    }
+
+    .posts a {
+      color: #34d399;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .posts a:hover {
+      text-decoration: underline;
+    }
+
+    .posts .post-meta {
+      color: #52525b;
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    .links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      color: #a1a1aa;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .links a:hover {
+      color: #34d399;
+    }
+
+    footer {
+      border-top: 1px solid #18181b;
+      padding-top: 24px;
+      margin-top: 48px;
+      color: #3f3f46;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>Pavel Espitia</h1>
+    <p class="subtitle">Full-stack AI + Blockchain Developer</p>
+
+    <div class="section">
+      <h2>About</h2>
+      <p class="bio">
+        I build developer tools at the intersection of AI and blockchain.
+        TypeScript by day, Solidity by night.
+        Based in Medellin, Colombia.
+        Currently focused on AI-powered security tooling for smart contracts
+        and natural language interfaces for on-chain data.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Projects</h2>
+      <div class="projects">
+        <a href="https://github.com/pavelEspitia/spectr-ai" class="project">
+          <div class="project-header">
+            <span class="project-name">spectr-ai</span>
+            <span class="project-badge badge-ai">AI</span>
+            <span class="project-badge badge-web3">Security</span>
+          </div>
+          <p class="project-desc">
+            AI-powered smart contract security auditor. CLI + web app that analyzes
+            Solidity and Vyper contracts using Claude or local models. Outputs
+            color-coded reports with code fixes, SARIF for CI, and HTML reports.
+          </p>
+        </a>
+
+        <a href="https://github.com/pavelEspitia/abilens" class="project">
+          <div class="project-header">
+            <span class="project-name">AbiLens</span>
+            <span class="project-badge badge-ai">AI</span>
+            <span class="project-badge badge-web3">Web3</span>
+          </div>
+          <p class="project-desc">
+            Chat with any EVM smart contract in natural language. Paste an address,
+            ask questions, read on-chain state. Auto-resolves ABIs from Etherscan
+            or reconstructs from bytecode via whatsabi.
+          </p>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Stack</h2>
+      <div class="stack">
+        <span class="stack-tag">TypeScript</span>
+        <span class="stack-tag">Solidity</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">Next.js</span>
+        <span class="stack-tag">Node.js</span>
+        <span class="stack-tag">Viem</span>
+        <span class="stack-tag">Claude API</span>
+        <span class="stack-tag">Ollama</span>
+        <span class="stack-tag">Vyper</span>
+        <span class="stack-tag">Hardhat</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Writing</h2>
+      <ul class="posts">
+        <li>
+          <a href="https://dev.to/pavelespitia/i-built-an-ai-smart-contract-auditor-in-a-weekend-heres-how-2kkn">
+            I Built an AI Smart Contract Auditor in a Weekend
+          </a>
+          <div class="post-meta">dev.to &middot; April 2026</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Links</h2>
+      <div class="links">
+        <a href="https://github.com/pavelEspitia">GitHub</a>
+        <a href="https://dev.to/pavelespitia">dev.to</a>
+        <a href="https://pavelespitia.hashnode.dev">Hashnode</a>
+      </div>
+    </div>
+
+    <footer>
+      Pavel Espitia &middot; Medellin, Colombia
+    </footer>
+
+  </div>
+</body>
+</html>
