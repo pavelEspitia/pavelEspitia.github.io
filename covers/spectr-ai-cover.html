@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      font-family: "JetBrains Mono", monospace;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Grid */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    /* Scanlines */
+    body::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,255,136,0.02) 2px, rgba(0,255,136,0.02) 4px
+      );
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 1080px;
+      padding: 60px;
+    }
+
+    .prompt {
+      color: #444;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .title {
+      font-size: 44px;
+      font-weight: 700;
+      color: #00ff88;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      text-shadow: 0 0 30px rgba(0,255,136,0.25);
+    }
+
+    .desc {
+      font-size: 18px;
+      color: #777;
+      margin-bottom: 36px;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    .tags {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .tag {
+      border: 1px solid;
+      padding: 4px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tag-ai { border-color: #00ff88; color: #00ff88; }
+    .tag-security { border-color: #ffbb00; color: #ffbb00; }
+    .tag-ts { border-color: #00e5ff; color: #00e5ff; }
+    .tag-web3 { border-color: #ff00ff; color: #ff00ff; }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .author-name {
+      font-size: 16px;
+      color: #aaa;
+    }
+
+    .author-handle {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Decorative glow orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+    }
+
+    .orb-1 {
+      width: 300px; height: 300px;
+      background: #00ff88;
+      top: -100px; right: -50px;
+    }
+
+    .orb-2 {
+      width: 200px; height: 200px;
+      background: #00e5ff;
+      bottom: -50px; left: 100px;
+    }
+
+    .orb-3 {
+      width: 150px; height: 150px;
+      background: #ff00ff;
+      top: 50%; right: 20%;
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="card">
+    <div class="prompt">$ spectr-ai analyze</div>
+    <div class="title">I Built an AI Smart<br>Contract Auditor<br>in a Weekend</div>
+    <div class="desc">CLI + web app that finds vulnerabilities in Solidity &amp; Vyper using Claude and local models</div>
+    <div class="tags">
+      <span class="tag tag-ai">AI</span>
+      <span class="tag tag-security">Security</span>
+      <span class="tag tag-ts">TypeScript</span>
+      <span class="tag tag-web3">Web3</span>
+    </div>
+    <div class="author">
+      <div>
+        <div class="author-name">Pavel Espitia</div>
+        <div class="author-handle">@pavelespitia</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
