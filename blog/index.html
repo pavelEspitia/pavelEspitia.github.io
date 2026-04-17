@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog — Pavel Espitia</title>
+  <meta name="description" content="Articles about AI, blockchain security, smart contracts, and developer tools by Pavel Espitia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "JetBrains Mono", monospace;
+      background: #0a0a0a; color: #b0b0b0;
+      line-height: 1.7; min-height: 100vh;
+    }
+    body::before {
+      content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+      background-size: 60px 60px; pointer-events: none;
+    }
+    .container { max-width: 760px; margin: 0 auto; padding: 48px 24px; position: relative; z-index: 1; }
+    header { margin-bottom: 48px; }
+    header a { color: #00ff88; text-decoration: none; font-size: 0.85rem; }
+    header a:hover { text-decoration: underline; }
+    h1 { font-family: "Inter", sans-serif; font-size: 2rem; color: #00ff88; margin: 8px 0 32px; text-shadow: 0 0 20px rgba(0,255,136,0.3); }
+    .posts { list-style: none; }
+    .post { border: 1px solid #1a1a1a; padding: 20px; margin-bottom: 12px; transition: border-color 0.2s; display: block; text-decoration: none; color: inherit; }
+    .post:hover { border-color: #00ff88; background: rgba(0,255,136,0.02); }
+    .post-title { font-family: "Inter", sans-serif; font-weight: 700; font-size: 1.1rem; color: #e0e0e0; margin-bottom: 6px; }
+    .post-desc { font-size: 0.85rem; color: #666; margin-bottom: 8px; }
+    .post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 0.7rem; padding: 2px 8px; border: 1px solid #333; color: #666; }
+    .tag-ai { border-color: #00ff88; color: #00ff88; }
+    .tag-security { border-color: #ffbb00; color: #ffbb00; }
+    .tag-web3 { border-color: #ff00ff; color: #ff00ff; }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid #1a1a1a; color: #333; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="/">&larr; pavelespitia.github.io</a>
+      <h1>Blog</h1>
+    </header>
+
+    <ul class="posts">
+      <li>
+        <a href="best-smart-contract-audit-tools-2026.html" class="post">
+          <div class="post-title">7 Best Smart Contract Audit Tools in 2026</div>
+          <div class="post-desc">Comparing free and paid tools — Slither, Mythril, CertiK, spectr-ai, and more.</div>
+          <div class="post-tags">
+            <span class="tag tag-security">Security</span>
+            <span class="tag tag-ai">AI</span>
+            <span class="tag tag-web3">Web3</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="best-ai-coding-tools-developers-2026.html" class="post">
+          <div class="post-title">10 Best AI Coding Tools for Developers in 2026</div>
+          <div class="post-desc">Copilot, Cursor, Claude Code, and the rest — which ones are worth it?</div>
+          <div class="post-tags">
+            <span class="tag tag-ai">AI</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="run-llm-locally-free-2026.html" class="post">
+          <div class="post-title">How to Run LLMs Locally for Free in 2026</div>
+          <div class="post-desc">Complete guide to Ollama, LM Studio, and local model setup.</div>
+          <div class="post-tags">
+            <span class="tag tag-ai">AI</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="solidity-security-checklist-2026.html" class="post">
+          <div class="post-title">The Ultimate Solidity Security Checklist</div>
+          <div class="post-desc">35 checks to run before every deployment, with code examples.</div>
+          <div class="post-tags">
+            <span class="tag tag-security">Security</span>
+            <span class="tag tag-web3">Web3</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="web3-developer-tools-2026.html" class="post">
+          <div class="post-title">15 Essential Web3 Developer Tools in 2026</div>
+          <div class="post-desc">Hardhat, Foundry, viem, The Graph, and more — organized by category.</div>
+          <div class="post-tags">
+            <span class="tag tag-web3">Web3</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <footer>Pavel Espitia // Medellin, Colombia</footer>
+  </div>
+</body>
+</html>

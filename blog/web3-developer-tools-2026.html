@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>15 Essential Web3 Developer Tools in 2026 | Pavel Espitia</title>
+  <meta name="description" content="The 15 essential Web3 developer tools in 2026. Covers Hardhat, Foundry, Remix, OpenZeppelin, viem, wagmi, RainbowKit, The Graph, Chainlink, Alchemy, Infura, Tenderly, spectr-ai, and AbiLens.">
+  <meta property="og:title" content="15 Essential Web3 Developer Tools in 2026">
+  <meta property="og:description" content="A curated list of the 15 most important Web3 developer tools in 2026, grouped by category with descriptions and links.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://pavelespitia.github.io/blog/web3-developer-tools-2026.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --green: #00ff88;
+      --green-dim: #00cc6a;
+      --green-dark: #00ff8815;
+      --cyan: #00e5ff;
+      --amber: #ffbb00;
+      --magenta: #ff00ff;
+      --bg: #0a0a0a;
+      --bg-card: #0f0f0f;
+      --border: #1a1a1a;
+      --text: #b0b0b0;
+      --text-dim: #555;
+    }
+    body {
+      font-family: "JetBrains Mono", monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,136,0.015) 2px, rgba(0,255,136,0.015) 4px);
+      pointer-events: none;
+      z-index: 999;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      position: relative;
+      z-index: 1;
+    }
+    nav {
+      margin-bottom: 48px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    nav a {
+      color: var(--green);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    nav a:hover { text-decoration: underline; }
+    .breadcrumb { font-size: 0.8rem; color: var(--text-dim); }
+    .breadcrumb a { color: var(--text-dim); }
+    .breadcrumb a:hover { color: var(--green); }
+    .meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+    }
+    h1 {
+      color: var(--green);
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    h2 {
+      color: #e0e0e0;
+      font-size: 1.15rem;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 {
+      color: var(--green);
+      font-size: 0.95rem;
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+    p { margin-bottom: 16px; font-size: 0.88rem; }
+    a { color: var(--green); }
+    a:hover { text-decoration: underline; }
+    ul, ol {
+      margin: 0 0 16px 20px;
+      font-size: 0.88rem;
+    }
+    li { margin-bottom: 6px; }
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .tool-card h3 {
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tool-card p:last-child { margin-bottom: 0; }
+    .tool-meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--green-dark);
+      color: var(--green);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+    .tag-cyan {
+      background: rgba(0,229,255,0.1);
+      color: var(--cyan);
+    }
+    .tag-amber {
+      background: rgba(255,187,0,0.1);
+      color: var(--amber);
+    }
+    .tag-magenta {
+      background: rgba(255,0,255,0.1);
+      color: var(--magenta);
+    }
+    .category-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 0.78rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+    th {
+      background: var(--bg-card);
+      color: var(--green);
+      font-weight: 700;
+    }
+    td { color: var(--text); }
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+    .cta-box {
+      background: var(--bg-card);
+      border: 1px solid var(--green);
+      border-radius: 8px;
+      padding: 28px;
+      margin: 40px 0;
+      text-align: center;
+    }
+    .cta-box h2 { border: none; margin-top: 0; text-align: center; }
+    .cta-box p { color: var(--text); }
+    .cta-btn {
+      display: inline-block;
+      background: var(--green);
+      color: #0a0a0a;
+      padding: 12px 28px;
+      font-weight: 700;
+      font-family: inherit;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 12px;
+    }
+    .cta-btn:hover { background: var(--green-dim); text-decoration: none; }
+    .related {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .related h2 { border: none; }
+    .related ul { list-style: none; margin-left: 0; }
+    .related li::before { content: "-> "; color: var(--green); }
+    footer {
+      margin-top: 48px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.25rem; }
+      .container { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <nav>
+    <a href="https://pavelespitia.github.io">&lt;- pavelespitia.github.io</a>
+    <div class="breadcrumb"><a href="https://pavelespitia.github.io">Home</a> / Blog / Web3 Tools</div>
+  </nav>
+
+  <h1>15 Essential Web3 Developer Tools in 2026</h1>
+  <div class="meta">Last updated: April 2026 &middot; 9 min read</div>
+
+  <p>The Web3 developer toolchain has matured significantly. Gone are the days of stitching together brittle scripts with web3.js and Truffle. In 2026, the ecosystem offers robust, well-maintained tools for every stage of development — from writing contracts to monitoring production deployments.</p>
+
+  <p>This guide covers the <strong>15 most important tools</strong> every Web3 developer should know, organized by category. Whether you are building your first dApp or managing a DeFi protocol, these are the tools that will make your life easier.</p>
+
+  <h2>Quick Reference Table</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Tool</th>
+          <th>Category</th>
+          <th>Pricing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Hardhat</td><td>Development</td><td>Free</td></tr>
+        <tr><td>2</td><td>Foundry</td><td>Development</td><td>Free</td></tr>
+        <tr><td>3</td><td>Remix</td><td>Development</td><td>Free</td></tr>
+        <tr><td>4</td><td>OpenZeppelin</td><td>Development</td><td>Free</td></tr>
+        <tr><td>5</td><td>Etherscan</td><td>Exploration</td><td>Free / API plans</td></tr>
+        <tr><td>6</td><td>viem</td><td>Frontend</td><td>Free</td></tr>
+        <tr><td>7</td><td>wagmi</td><td>Frontend</td><td>Free</td></tr>
+        <tr><td>8</td><td>RainbowKit</td><td>Frontend</td><td>Free</td></tr>
+        <tr><td>9</td><td>The Graph</td><td>Data</td><td>Free tier / pay-per-query</td></tr>
+        <tr><td>10</td><td>Chainlink</td><td>Infrastructure</td><td>LINK token fees</td></tr>
+        <tr><td>11</td><td>Alchemy</td><td>Infrastructure</td><td>Free tier / from $49/mo</td></tr>
+        <tr><td>12</td><td>Infura</td><td>Infrastructure</td><td>Free tier / from $50/mo</td></tr>
+        <tr><td>13</td><td>Tenderly</td><td>Monitoring</td><td>Free tier / from $40/mo</td></tr>
+        <tr><td>14</td><td>spectr-ai</td><td>Security</td><td>Free / $19 checklist</td></tr>
+        <tr><td>15</td><td>AbiLens</td><td>Exploration</td><td>Free</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DEVELOPMENT -->
+  <h2>Development Frameworks</h2>
+  <span class="category-label tag">DEVELOPMENT</span>
+
+  <div class="tool-card">
+    <h3>1. Hardhat</h3>
+    <div class="tool-meta">Free &middot; Open Source &middot; <a href="#affiliate-link">hardhat.org</a></div>
+    <p>Hardhat is the most popular Ethereum development environment. It provides a local EVM network (Hardhat Network) for testing, a flexible plugin system, and first-class TypeScript support. The task runner makes it easy to script deployments and custom workflows.</p>
+    <p>In 2026, Hardhat remains the default choice for JavaScript/TypeScript teams. Its plugin ecosystem covers everything from gas reporting to contract verification. The built-in console.log for Solidity is still unmatched for debugging.</p>
+    <p><strong>Best for:</strong> TypeScript teams, projects with complex deployment scripts, developers who want a large plugin ecosystem.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>2. Foundry</h3>
+    <div class="tool-meta">Free &middot; Open Source &middot; <a href="#affiliate-link">getfoundry.sh</a></div>
+    <p>Foundry is a blazing-fast Rust-based toolkit that includes Forge (testing), Cast (CLI interactions), Anvil (local node), and Chisel (REPL). Tests are written in Solidity, not JavaScript, which means you test in the same language you deploy.</p>
+    <p>Foundry's fuzz testing and invariant testing capabilities are superior to any other framework. Compilation and test execution are 10-100x faster than Hardhat. In 2026, Foundry is the preferred choice for security-focused teams and anyone writing complex test suites.</p>
+    <p><strong>Best for:</strong> Security-focused teams, fuzz testing, Solidity-native workflows, fast iteration.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>3. Remix</h3>
+    <div class="tool-meta">Free &middot; Browser-based &middot; <a href="#affiliate-link">remix.ethereum.org</a></div>
+    <p>Remix is a browser-based IDE for Solidity development. No installation required — open the URL and start writing contracts. It includes a compiler, debugger, static analysis plugins, and deployment tools for testnets and mainnet.</p>
+    <p>Remix is best for learning, quick prototyping, and contract verification. Professional teams typically graduate to Hardhat or Foundry, but keep Remix bookmarked for debugging deployed contracts and quick experiments.</p>
+    <p><strong>Best for:</strong> Learning Solidity, quick prototyping, verifying deployed contracts.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>4. OpenZeppelin Contracts</h3>
+    <div class="tool-meta">Free &middot; Open Source &middot; <a href="#affiliate-link">openzeppelin.com/contracts</a></div>
+    <p>OpenZeppelin Contracts is the standard library for Solidity. It provides audited, battle-tested implementations of ERC-20, ERC-721, ERC-1155, access control, upgradeable proxies, governance, and more. Nearly every production smart contract imports OpenZeppelin.</p>
+    <p>In 2026, version 5.x has streamlined the API, removed deprecated patterns, and added Solidity 0.8.20+ features. The upgradeable variant supports both UUPS and Transparent proxy patterns.</p>
+    <p><strong>Best for:</strong> Every Solidity project. There is no reason to write your own ERC-20 implementation.</p>
+  </div>
+
+  <!-- EXPLORATION -->
+  <h2>Exploration and Data</h2>
+  <span class="category-label tag-cyan">EXPLORATION</span>
+
+  <div class="tool-card">
+    <h3>5. Etherscan</h3>
+    <div class="tool-meta">Free (basic) &middot; API plans available &middot; <a href="#affiliate-link">etherscan.io</a></div>
+    <p>Etherscan is the block explorer for Ethereum (and its multi-chain variants: Polygonscan, BscScan, etc.). It provides contract verification, transaction tracing, token tracking, and API access for on-chain data.</p>
+    <p>Every developer uses Etherscan daily — for verifying deployments, debugging failed transactions, reading contract storage, and checking gas prices. The API is essential for building applications that query on-chain data.</p>
+    <p><strong>Best for:</strong> Contract verification, transaction debugging, on-chain data queries.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>9. The Graph</h3>
+    <div class="tool-meta">Free tier &middot; Pay-per-query &middot; <a href="#affiliate-link">thegraph.com</a></div>
+    <p>The Graph is a decentralized indexing protocol for querying blockchain data with GraphQL. Instead of parsing raw event logs, you define a subgraph schema and The Graph indexes on-chain events into a queryable API.</p>
+    <p>Subgraphs power the frontend of most DeFi protocols — Uniswap, Aave, Compound all use The Graph for their dashboards. The decentralized network ensures your data indexing does not depend on a single provider.</p>
+    <p><strong>Best for:</strong> DeFi dashboards, historical data queries, any frontend that needs indexed on-chain data.</p>
+  </div>
+
+  <!-- FRONTEND -->
+  <h2>Frontend Libraries</h2>
+  <span class="category-label tag-amber">FRONTEND</span>
+
+  <div class="tool-card">
+    <h3>6. viem</h3>
+    <div class="tool-meta">Free &middot; Open Source &middot; <a href="#affiliate-link">viem.sh</a></div>
+    <p>viem is a TypeScript library for Ethereum interactions that replaced ethers.js and web3.js as the ecosystem standard. It provides type-safe contract interactions, ABI encoding/decoding, and wallet management with zero runtime dependencies.</p>
+    <p>viem's design philosophy prioritizes correctness and type safety. Every function is strongly typed from ABI to return value, catching errors at compile time rather than runtime. Performance is excellent — tree-shakeable with minimal bundle size.</p>
+    <p><strong>Best for:</strong> Any TypeScript project interacting with EVM chains. The modern standard.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>7. wagmi</h3>
+    <div class="tool-meta">Free &middot; Open Source &middot; <a href="#affiliate-link">wagmi.sh</a></div>
+    <p>wagmi is a collection of React hooks for Ethereum. Built on top of viem, it provides hooks for connecting wallets, reading contracts, sending transactions, and managing chain state — all with automatic caching, revalidation, and error handling.</p>
+    <p>wagmi handles the complex state management of blockchain interactions (pending transactions, confirmations, chain switching, wallet reconnection) so you can focus on your application logic.</p>
+    <p><strong>Best for:</strong> React-based dApps. Pairs with viem for a complete TypeScript frontend stack.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>8. RainbowKit</h3>
+    <div class="tool-meta">Free &middot; Open Source &middot; <a href="#affiliate-link">rainbowkit.com</a></div>
+    <p>RainbowKit provides a polished wallet connection UI component for React apps. It supports MetaMask, WalletConnect, Coinbase Wallet, and dozens of other wallets out of the box, with a customizable modal that handles the entire connection flow.</p>
+    <p>Instead of building wallet connection UI from scratch, drop in RainbowKit and get a production-ready experience in minutes. It integrates directly with wagmi for state management.</p>
+    <p><strong>Best for:</strong> Any React dApp that needs wallet connection. Saves weeks of UI development.</p>
+  </div>
+
+  <!-- INFRASTRUCTURE -->
+  <h2>Infrastructure</h2>
+  <span class="category-label tag-magenta">INFRASTRUCTURE</span>
+
+  <div class="tool-card">
+    <h3>10. Chainlink</h3>
+    <div class="tool-meta">LINK token fees &middot; <a href="#affiliate-link">chain.link</a></div>
+    <p>Chainlink is the dominant oracle network for smart contracts. It provides decentralized price feeds, verifiable randomness (VRF), automation (Keepers), and cross-chain messaging (CCIP). If your contract needs off-chain data, Chainlink is the standard.</p>
+    <p>In 2026, Chainlink's CCIP has become the primary bridge for cross-chain token transfers and messaging. The price feed network covers 1000+ pairs across all major chains.</p>
+    <p><strong>Best for:</strong> Price feeds, VRF, automation, cross-chain messaging. The oracle standard.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>11. Alchemy</h3>
+    <div class="tool-meta">Free tier &middot; From $49/mo &middot; <a href="#affiliate-link">alchemy.com</a></div>
+    <p>Alchemy provides enhanced RPC endpoints, webhook notifications, NFT APIs, and developer dashboards for EVM chains. It is the most popular node provider, serving over 70% of top Ethereum applications.</p>
+    <p>Beyond basic RPC, Alchemy offers enhanced APIs for token balances, transaction history, NFT metadata, and trace data that are not available from standard nodes. The dashboard provides request analytics and error tracking.</p>
+    <p><strong>Best for:</strong> Production dApps that need reliable RPC, enhanced APIs, and monitoring.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>12. Infura</h3>
+    <div class="tool-meta">Free tier &middot; From $50/mo &middot; <a href="#affiliate-link">infura.io</a></div>
+    <p>Infura (by Consensys) provides RPC endpoints for Ethereum, IPFS, and L2 networks. It is the original node-as-a-service provider and remains a reliable choice for teams that want straightforward API access without platform lock-in.</p>
+    <p>Infura's IPFS gateway and pinning service make it a natural choice for NFT projects that need decentralized storage alongside blockchain access.</p>
+    <p><strong>Best for:</strong> Teams that want no-frills RPC access, IPFS integration, Consensys ecosystem alignment.</p>
+  </div>
+
+  <!-- MONITORING -->
+  <h2>Monitoring and Debugging</h2>
+  <span class="category-label tag-cyan">MONITORING</span>
+
+  <div class="tool-card">
+    <h3>13. Tenderly</h3>
+    <div class="tool-meta">Free tier &middot; From $40/mo &middot; <a href="#affiliate-link">tenderly.co</a></div>
+    <p>Tenderly provides transaction simulation, debugging, monitoring, and alerting for smart contracts. Its standout feature is the transaction simulator — test any transaction against the current chain state without spending gas.</p>
+    <p>The visual debugger lets you step through EVM execution with full stack traces, storage changes, and event emissions. Alerting watches for specific on-chain conditions and triggers webhooks. Web3 Actions let you run serverless code in response to on-chain events.</p>
+    <p><strong>Best for:</strong> Debugging failed transactions, simulating complex DeFi interactions, production monitoring.</p>
+  </div>
+
+  <!-- SECURITY -->
+  <h2>Security</h2>
+  <span class="category-label tag">SECURITY</span>
+
+  <div class="tool-card">
+    <h3>14. spectr-ai</h3>
+    <div class="tool-meta">Free (open source) &middot; Checklist $19 &middot; <a href="#affiliate-link">spectr-ai</a></div>
+    <p>spectr-ai is an AI-powered smart contract audit engine that runs locally. It combines pattern-based static analysis with LLM reasoning (Claude or Ollama) to find vulnerabilities that traditional tools miss — logic bugs, business rule violations, and cross-function interaction issues.</p>
+    <p>Unlike cloud-based audit platforms, spectr-ai keeps your code on your machine. The <a href="#affiliate-link">Security Checklist ($19)</a> provides a structured audit workflow, and the Pro API enables CI/CD integration for continuous scanning. See our <a href="/blog/best-smart-contract-audit-tools-2026.html">audit tools comparison</a> for how it stacks up.</p>
+    <p><strong>Best for:</strong> AI-powered security analysis, local/private auditing, continuous scanning in CI/CD.</p>
+  </div>
+
+  <div class="tool-card">
+    <h3>15. AbiLens</h3>
+    <div class="tool-meta">Free &middot; Open Source &middot; <a href="#affiliate-link">AbiLens</a></div>
+    <p>AbiLens lets you chat with any deployed EVM smart contract. Point it at a contract address, and it auto-detects the ABI (using whatsabi), displays all functions and events, and lets you read state and simulate writes through a conversational interface.</p>
+    <p>Built with Next.js, viem, and local LLMs (Ollama), AbiLens is useful for exploring unfamiliar contracts, testing interactions before committing to a transaction, and understanding protocol behavior without reading source code.</p>
+    <p><strong>Best for:</strong> Exploring deployed contracts, understanding protocol interfaces, safe transaction simulation.</p>
+  </div>
+
+  <h2>Putting It All Together</h2>
+  <p>A typical Web3 development stack in 2026 looks like this:</p>
+  <ol>
+    <li><strong>Write contracts:</strong> Foundry (Solidity) + OpenZeppelin Contracts</li>
+    <li><strong>Test:</strong> Forge (unit + fuzz + invariant) + Anvil (local fork)</li>
+    <li><strong>Security:</strong> spectr-ai (AI analysis) + Slither (static analysis)</li>
+    <li><strong>Deploy:</strong> Foundry scripts + Alchemy/Infura RPC</li>
+    <li><strong>Frontend:</strong> viem + wagmi + RainbowKit (React)</li>
+    <li><strong>Data:</strong> The Graph (indexed queries) + Etherscan API (raw data)</li>
+    <li><strong>Oracles:</strong> Chainlink (price feeds, VRF, automation)</li>
+    <li><strong>Monitor:</strong> Tenderly (simulation, alerts, debugging)</li>
+    <li><strong>Explore:</strong> AbiLens (contract interaction) + Etherscan (verification)</li>
+  </ol>
+
+  <p>You do not need all 15 tools on day one. Start with Foundry + OpenZeppelin + viem, add tools as your project grows, and always run spectr-ai before deploying. Check the <a href="/blog/solidity-security-checklist-2026.html">Solidity Security Checklist</a> for a pre-deployment review process.</p>
+
+  <div class="cta-box">
+    <h2>Secure Your Smart Contracts</h2>
+    <p>spectr-ai adds AI-powered security analysis to your development workflow. Free and open source. Runs locally with Ollama or Claude.</p>
+    <a href="#affiliate-link" class="cta-btn">Try spectr-ai Free -></a>
+    <p style="margin-top:12px;font-size:0.75rem;">Also try <a href="#affiliate-link">AbiLens</a> — chat with any deployed contract.</p>
+  </div>
+
+  <div class="related">
+    <h2>Related Posts</h2>
+    <ul>
+      <li><a href="/blog/best-smart-contract-audit-tools-2026.html">7 Best Smart Contract Audit Tools in 2026</a></li>
+      <li><a href="/blog/solidity-security-checklist-2026.html">The Ultimate Solidity Security Checklist (2026)</a></li>
+      <li><a href="/blog/best-ai-coding-tools-developers-2026.html">10 Best AI Coding Tools for Developers in 2026</a></li>
+      <li><a href="/blog/run-llm-locally-free-2026.html">How to Run LLMs Locally for Free in 2026</a></li>
+    </ul>
+  </div>
+
+  <footer>&copy; 2026 Pavel Espitia. All rights reserved.</footer>
+</div>
+</body>
+</html>

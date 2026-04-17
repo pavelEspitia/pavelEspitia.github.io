@@ -1,0 +1,19 @@
+{
+  "name": "pavelEspitia.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.19.0",
+  "devDependencies": {
+    "playwright": "^1.59.1",
+    "puppeteer": "^24.41.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
+}

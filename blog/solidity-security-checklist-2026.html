@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Ultimate Solidity Security Checklist (2026) | Pavel Espitia</title>
+  <meta name="description" content="Comprehensive Solidity security checklist for 2026. Covers reentrancy, access control, integer handling, external calls, token security, oracle attacks, DoS prevention, and testing with code examples.">
+  <meta property="og:title" content="The Ultimate Solidity Security Checklist (2026)">
+  <meta property="og:description" content="A developer's complete checklist for writing secure Solidity smart contracts in 2026, with vulnerability examples and fixes.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://pavelespitia.github.io/blog/solidity-security-checklist-2026.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --green: #00ff88;
+      --green-dim: #00cc6a;
+      --green-dark: #00ff8815;
+      --red: #ff4444;
+      --bg: #0a0a0a;
+      --bg-card: #0f0f0f;
+      --border: #1a1a1a;
+      --text: #b0b0b0;
+      --text-dim: #555;
+    }
+    body {
+      font-family: "JetBrains Mono", monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,136,0.015) 2px, rgba(0,255,136,0.015) 4px);
+      pointer-events: none;
+      z-index: 999;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      position: relative;
+      z-index: 1;
+    }
+    nav {
+      margin-bottom: 48px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    nav a {
+      color: var(--green);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    nav a:hover { text-decoration: underline; }
+    .breadcrumb { font-size: 0.8rem; color: var(--text-dim); }
+    .breadcrumb a { color: var(--text-dim); }
+    .breadcrumb a:hover { color: var(--green); }
+    .meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+    }
+    h1 {
+      color: var(--green);
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    h2 {
+      color: #e0e0e0;
+      font-size: 1.15rem;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 {
+      color: var(--green);
+      font-size: 0.95rem;
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+    p { margin-bottom: 16px; font-size: 0.88rem; }
+    a { color: var(--green); }
+    a:hover { text-decoration: underline; }
+    ul, ol {
+      margin: 0 0 16px 20px;
+      font-size: 0.88rem;
+    }
+    li { margin-bottom: 6px; }
+    code {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.82rem;
+      color: var(--green);
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 16px 0;
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .vuln-label {
+      display: inline-block;
+      background: #ff444420;
+      color: var(--red);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+    .fix-label {
+      display: inline-block;
+      background: var(--green-dark);
+      color: var(--green);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+    .checklist {
+      list-style: none;
+      margin-left: 0;
+    }
+    .checklist li {
+      padding: 6px 0 6px 28px;
+      position: relative;
+    }
+    .checklist li::before {
+      content: "[ ]";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-size: 0.82rem;
+    }
+    .cta-box {
+      background: var(--bg-card);
+      border: 1px solid var(--green);
+      border-radius: 8px;
+      padding: 28px;
+      margin: 40px 0;
+      text-align: center;
+    }
+    .cta-box h2 { border: none; margin-top: 0; text-align: center; }
+    .cta-box p { color: var(--text); }
+    .cta-btn {
+      display: inline-block;
+      background: var(--green);
+      color: #0a0a0a;
+      padding: 12px 28px;
+      font-weight: 700;
+      font-family: inherit;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 12px;
+    }
+    .cta-btn:hover { background: var(--green-dim); text-decoration: none; }
+    .tip {
+      background: var(--bg-card);
+      border-left: 3px solid var(--green);
+      padding: 12px 16px;
+      margin: 16px 0;
+      font-size: 0.84rem;
+    }
+    .related {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .related h2 { border: none; }
+    .related ul { list-style: none; margin-left: 0; }
+    .related li::before { content: "-> "; color: var(--green); }
+    footer {
+      margin-top: 48px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.25rem; }
+      .container { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <nav>
+    <a href="https://pavelespitia.github.io">&lt;- pavelespitia.github.io</a>
+    <div class="breadcrumb"><a href="https://pavelespitia.github.io">Home</a> / Blog / Security Checklist</div>
+  </nav>
+
+  <h1>The Ultimate Solidity Security Checklist (2026)</h1>
+  <div class="meta">Last updated: April 2026 &middot; 14 min read</div>
+
+  <p>Every major smart contract exploit in 2025 could have been prevented by following known security practices. The problem is not a lack of knowledge — it is a lack of systematic checking. Developers know about reentrancy, but miss the edge case in their specific implementation.</p>
+
+  <p>This checklist covers the <strong>8 most exploited vulnerability categories</strong> in Solidity, with code examples showing both the vulnerable pattern and the fix. Use it as a pre-deployment review guide.</p>
+
+  <div class="tip">
+    <strong>Want a printable version?</strong> The <a href="#affiliate-link">spectr-ai Security Checklist ($19)</a> includes this checklist as a structured template with automated scanning for each item, plus additional checks for DeFi-specific patterns.
+  </div>
+
+  <h2>1. Reentrancy</h2>
+  <p>Reentrancy remains the most exploited vulnerability class. It occurs when an external call allows the called contract to re-enter the calling function before state updates are complete.</p>
+
+  <h3>Vulnerable Pattern</h3>
+  <div class="vuln-label">VULNERABLE</div>
+  <pre><code>function withdraw(uint amount) external {
+    require(balances[msg.sender] >= amount);
+
+    // External call BEFORE state update
+    (bool success, ) = msg.sender.call{value: amount}("");
+    require(success);
+
+    // State update happens after the call
+    // Attacker re-enters before this line executes
+    balances[msg.sender] -= amount;
+}</code></pre>
+
+  <h3>Fix: Checks-Effects-Interactions</h3>
+  <div class="fix-label">SECURE</div>
+  <pre><code>function withdraw(uint amount) external nonReentrant {
+    require(balances[msg.sender] >= amount);
+
+    // State update BEFORE external call
+    balances[msg.sender] -= amount;
+
+    // External call last
+    (bool success, ) = msg.sender.call{value: amount}("");
+    require(success);
+}</code></pre>
+
+  <h3>Checklist</h3>
+  <ul class="checklist">
+    <li>All external calls follow checks-effects-interactions pattern</li>
+    <li>ReentrancyGuard applied to functions with external calls</li>
+    <li>Cross-function reentrancy considered (shared state between functions)</li>
+    <li>Read-only reentrancy checked (view functions reading stale state)</li>
+    <li>Cross-contract reentrancy evaluated for multi-contract systems</li>
+  </ul>
+
+  <h2>2. Access Control</h2>
+  <p>Missing or incorrect access control allows unauthorized users to call admin functions, drain funds, or modify contract state. This includes unprotected initializers in proxy patterns.</p>
+
+  <h3>Vulnerable Pattern</h3>
+  <div class="vuln-label">VULNERABLE</div>
+  <pre><code>// No access control — anyone can call
+function setPrice(uint newPrice) external {
+    price = newPrice;
+}
+
+// Initializer without protection
+function initialize(address _owner) external {
+    owner = _owner;  // Can be called by anyone, even after init
+}</code></pre>
+
+  <h3>Fix: Explicit Access Control</h3>
+  <div class="fix-label">SECURE</div>
+  <pre><code>function setPrice(uint newPrice) external onlyOwner {
+    price = newPrice;
+}
+
+// Protected initializer
+function initialize(address _owner) external initializer {
+    __Ownable_init(_owner);
+}</code></pre>
+
+  <h3>Checklist</h3>
+  <ul class="checklist">
+    <li>Every state-changing function has explicit access control</li>
+    <li>Initializers use <code>initializer</code> modifier (proxy patterns)</li>
+    <li>Role-based access uses OpenZeppelin AccessControl over custom logic</li>
+    <li>Two-step ownership transfer implemented</li>
+    <li>No hardcoded addresses — use constructor parameters</li>
+    <li>Default admin role has time-locked or multisig protection</li>
+  </ul>
+
+  <h2>3. Integer Handling</h2>
+  <p>Solidity 0.8+ has built-in overflow protection, but unchecked blocks, casting, and division edge cases still cause issues. Precision loss in financial calculations is a common source of bugs.</p>
+
+  <h3>Vulnerable Pattern</h3>
+  <div class="vuln-label">VULNERABLE</div>
+  <pre><code>// Precision loss — division before multiplication
+function calculateFee(uint amount, uint rate)
+    external pure returns (uint)
+{
+    // If amount=99, rate=100, basis=10000:
+    // 99/10000 = 0, then 0*100 = 0 (fee lost!)
+    return (amount / 10000) * rate;
+}
+
+// Unsafe downcast
+function storeBalance(uint256 amount) external {
+    // Silently truncates values > type(uint128).max
+    userBalance[msg.sender] = uint128(amount);
+}</code></pre>
+
+  <h3>Fix: Safe Math Patterns</h3>
+  <div class="fix-label">SECURE</div>
+  <pre><code>// Multiplication before division
+function calculateFee(uint amount, uint rate)
+    external pure returns (uint)
+{
+    return (amount * rate) / 10000;
+}
+
+// Safe downcast with OpenZeppelin
+import {SafeCast} from "@openzeppelin/contracts/utils/math/SafeCast.sol";
+
+function storeBalance(uint256 amount) external {
+    // Reverts if amount > type(uint128).max
+    userBalance[msg.sender] = SafeCast.toUint128(amount);
+}</code></pre>
+
+  <h3>Checklist</h3>
+  <ul class="checklist">
+    <li>Multiplication performed before division</li>
+    <li>Safe casting used for all type narrowing</li>
+    <li>Unchecked blocks justified with comments</li>
+    <li>Division by zero handled</li>
+    <li>Rounding direction specified and consistent (round down for fees, round up for debt)</li>
+    <li>Token decimals accounted for in cross-token calculations</li>
+  </ul>
+
+  <h2>4. External Calls</h2>
+  <p>Every external call is a potential attack vector. Low-level calls can silently fail, return data can be manipulated, and gas forwarding enables griefing attacks.</p>
+
+  <h3>Vulnerable Pattern</h3>
+  <div class="vuln-label">VULNERABLE</div>
+  <pre><code>// Return value not checked — silent failure
+function distribute(address payable recipient, uint amount)
+    external
+{
+    recipient.send(amount);  // Returns false on failure, ignored
+}
+
+// Unbounded gas forwarding
+function execute(address target, bytes calldata data)
+    external
+{
+    // Forwards all gas — target can consume it
+    target.call(data);
+}</code></pre>
+
+  <h3>Fix: Safe External Calls</h3>
+  <div class="fix-label">SECURE</div>
+  <pre><code>// Check return value
+function distribute(address payable recipient, uint amount)
+    external
+{
+    (bool success, ) = recipient.call{value: amount}("");
+    require(success, "Transfer failed");
+}
+
+// Or use OpenZeppelin's Address library
+import {Address} from "@openzeppelin/contracts/utils/Address.sol";
+
+function distribute(address payable recipient, uint amount)
+    external
+{
+    Address.sendValue(recipient, amount);
+}</code></pre>
+
+  <h3>Checklist</h3>
+  <ul class="checklist">
+    <li>All return values from external calls checked</li>
+    <li>No use of <code>transfer()</code> or <code>send()</code> (use <code>call</code> with return check)</li>
+    <li>Gas limits set for external calls where appropriate</li>
+    <li>Callback functions protected against unauthorized callers</li>
+    <li>Delegatecall restricted to trusted contracts only</li>
+  </ul>
+
+  <h2>5. Token Handling</h2>
+  <p>Not all ERC-20 tokens behave the same. Fee-on-transfer tokens, rebasing tokens, tokens with blocklists, and tokens that return false instead of reverting all break naive implementations.</p>
+
+  <h3>Vulnerable Pattern</h3>
+  <div class="vuln-label">VULNERABLE</div>
+  <pre><code>// Assumes transfer amount equals received amount
+function deposit(uint amount) external {
+    token.transferFrom(msg.sender, address(this), amount);
+    // Fee-on-transfer tokens: actual received &lt; amount
+    balances[msg.sender] += amount;  // Inflated balance!
+}</code></pre>
+
+  <h3>Fix: Measure Actual Balance Change</h3>
+  <div class="fix-label">SECURE</div>
+  <pre><code>function deposit(uint amount) external {
+    uint balanceBefore = token.balanceOf(address(this));
+    SafeERC20.safeTransferFrom(token, msg.sender, address(this), amount);
+    uint received = token.balanceOf(address(this)) - balanceBefore;
+    balances[msg.sender] += received;
+}</code></pre>
+
+  <h3>Checklist</h3>
+  <ul class="checklist">
+    <li>SafeERC20 used for all token transfers</li>
+    <li>Fee-on-transfer tokens handled (measure balance change)</li>
+    <li>Rebasing tokens accounted for (use shares, not amounts)</li>
+    <li>Token approval race condition mitigated</li>
+    <li>ERC-777 hook reentrancy considered</li>
+    <li>Token decimal differences handled in multi-token systems</li>
+  </ul>
+
+  <h2>6. Oracle Security</h2>
+  <p>Price oracles are a frequent attack vector in DeFi. Spot prices from AMMs can be manipulated in a single transaction via flash loans. Stale oracle data leads to incorrect pricing.</p>
+
+  <h3>Vulnerable Pattern</h3>
+  <div class="vuln-label">VULNERABLE</div>
+  <pre><code>// Using spot price — manipulable via flash loan
+function getPrice() external view returns (uint) {
+    (uint reserve0, uint reserve1, ) = pair.getReserves();
+    return (reserve1 * 1e18) / reserve0;  // Flash-loanable!
+}</code></pre>
+
+  <h3>Fix: Use Time-Weighted Oracles</h3>
+  <div class="fix-label">SECURE</div>
+  <pre><code>function getPrice() external view returns (uint) {
+    (
+        ,
+        int256 price,
+        ,
+        uint256 updatedAt,
+
+    ) = chainlinkFeed.latestRoundData();
+
+    // Check for stale data
+    require(
+        block.timestamp - updatedAt &lt; STALENESS_THRESHOLD,
+        "Stale price"
+    );
+    require(price > 0, "Invalid price");
+
+    return uint256(price);
+}</code></pre>
+
+  <h3>Checklist</h3>
+  <ul class="checklist">
+    <li>No use of AMM spot prices for critical calculations</li>
+    <li>Chainlink or TWAP oracles used</li>
+    <li>Staleness checks on all oracle reads</li>
+    <li>Fallback oracle configured</li>
+    <li>Price deviation bounds enforced (circuit breakers)</li>
+    <li>L2 sequencer uptime checked (for L2 deployments)</li>
+  </ul>
+
+  <h2>7. Denial of Service</h2>
+  <p>DoS vulnerabilities prevent legitimate users from interacting with the contract. Common vectors include unbounded loops over user-controlled arrays and strict equality checks on balances.</p>
+
+  <h3>Vulnerable Pattern</h3>
+  <div class="vuln-label">VULNERABLE</div>
+  <pre><code>// Unbounded loop — gas limit DoS
+function distributeRewards() external {
+    // If stakers array grows large enough,
+    // this exceeds block gas limit
+    for (uint i = 0; i &lt; stakers.length; i++) {
+        token.transfer(stakers[i], rewards[stakers[i]]);
+    }
+}
+
+// Strict balance check — can be broken by dust deposit
+function withdrawAll() external {
+    require(address(this).balance == totalDeposits);
+    // Attacker sends 1 wei via selfdestruct, breaks equality
+}</code></pre>
+
+  <h3>Fix: Pull Pattern and Inequality Checks</h3>
+  <div class="fix-label">SECURE</div>
+  <pre><code>// Pull pattern — users claim individually
+function claimReward() external {
+    uint reward = rewards[msg.sender];
+    require(reward > 0, "No reward");
+    rewards[msg.sender] = 0;
+    token.transfer(msg.sender, reward);
+}
+
+// Use >= instead of ==
+function withdrawAll() external {
+    require(address(this).balance >= totalDeposits);
+}</code></pre>
+
+  <h3>Checklist</h3>
+  <ul class="checklist">
+    <li>No unbounded loops over dynamic arrays</li>
+    <li>Pull pattern used over push pattern for distributions</li>
+    <li>No strict equality checks on balances</li>
+    <li>Gas limits considered for all iterations</li>
+    <li>Failed transfers do not block other users</li>
+    <li>Emergency withdrawal mechanism available</li>
+  </ul>
+
+  <h2>8. Testing and Verification</h2>
+  <p>Testing is not optional. Every vulnerability category above should have explicit test cases that verify the protection works.</p>
+
+  <h3>Checklist</h3>
+  <ul class="checklist">
+    <li>Unit tests for every public/external function</li>
+    <li>Fuzz testing with Foundry for arithmetic edge cases</li>
+    <li>Invariant testing for protocol-level properties</li>
+    <li>Fork testing against mainnet state for integrations</li>
+    <li>100% branch coverage on security-critical paths</li>
+    <li>Slither static analysis passing with zero warnings</li>
+    <li>spectr-ai or Mythril scan before every deployment</li>
+    <li>Manual review by at least one other developer</li>
+    <li>Deployment script tested on testnet</li>
+    <li>Upgrade path tested (if using proxies)</li>
+  </ul>
+
+  <h2>Pre-Deployment Summary</h2>
+  <p>Before deploying to mainnet, run through this condensed checklist:</p>
+  <ol>
+    <li>Run <a href="/blog/best-smart-contract-audit-tools-2026.html">Slither and spectr-ai</a> — fix all findings</li>
+    <li>Verify all external calls follow checks-effects-interactions</li>
+    <li>Confirm access control on every state-changing function</li>
+    <li>Test with fee-on-transfer and rebasing tokens if applicable</li>
+    <li>Validate oracle staleness thresholds match real-world update frequencies</li>
+    <li>Ensure no unbounded loops exist</li>
+    <li>Run fuzz tests with at least 10,000 runs</li>
+    <li>Deploy to testnet and run full integration tests</li>
+    <li>Have another developer review the final code</li>
+    <li>Document all known limitations and assumptions</li>
+  </ol>
+
+  <div class="cta-box">
+    <h2>Automate This Checklist</h2>
+    <p>The <a href="#affiliate-link">spectr-ai Security Checklist ($19)</a> turns this guide into an automated workflow. Scan your contracts against each item, get severity ratings, and export a pre-audit report. The spectr-ai Pro API integrates into your CI/CD pipeline.</p>
+    <a href="#affiliate-link" class="cta-btn">Get the Checklist ($19) -></a>
+    <p style="margin-top:12px;font-size:0.75rem;">Or <a href="#affiliate-link">try the free open-source engine</a> for basic scanning.</p>
+  </div>
+
+  <div class="related">
+    <h2>Related Posts</h2>
+    <ul>
+      <li><a href="/blog/best-smart-contract-audit-tools-2026.html">7 Best Smart Contract Audit Tools in 2026</a></li>
+      <li><a href="/blog/web3-developer-tools-2026.html">15 Essential Web3 Developer Tools in 2026</a></li>
+      <li><a href="/blog/best-ai-coding-tools-developers-2026.html">10 Best AI Coding Tools for Developers in 2026</a></li>
+      <li><a href="/blog/run-llm-locally-free-2026.html">How to Run LLMs Locally for Free in 2026</a></li>
+    </ul>
+  </div>
+
+  <footer>&copy; 2026 Pavel Espitia. All rights reserved.</footer>
+</div>
+</body>
+</html>
