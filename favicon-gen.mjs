@@ -78,15 +78,13 @@ const renderTo = async (size, filename, opts = {}) => {
   console.log(`✓ ${filename}`);
 };
 
-// Standard favicon set (transparent, works on any browser tab background)
-await renderTo(192, "icon-192.png");
-await renderTo(512, "icon-512.png");
+// All sizes use the site's dark background for contrast.
+const BG = "#050505";
 
-// Apple touch icon — REQUIRED to be square with bg (iOS doesn't support transparency)
-await renderTo(180, "apple-touch-icon.png", { bg: "#050505" });
-
-// Hi-res favicon for modern browsers (transparent)
-await renderTo(256, "favicon.png");
+await renderTo(256, "favicon.png", { bg: BG });
+await renderTo(192, "icon-192.png", { bg: BG });
+await renderTo(512, "icon-512.png", { bg: BG });
+await renderTo(180, "apple-touch-icon.png", { bg: BG });
 
 await browser.close();
 console.log("done.");
