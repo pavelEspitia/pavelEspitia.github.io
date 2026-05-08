@@ -9,6 +9,10 @@
   <meta property="og:description" content="Senior software engineer specialising in Web3 and AI. Smart contract security, natural-language EVM interfaces, and developer tooling.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://pavelespitia.github.io">
+  <link rel="icon" type="image/png" sizes="any" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -57,18 +61,27 @@
       z-index: -2;
     }
 
-    /* Diagonal fracture line — decorative, subtle */
+    /* Diagonal fracture line — decorative */
     body::after {
       content: "";
       position: fixed;
       inset: 0;
-      background: linear-gradient(
-        -8deg,
-        transparent calc(50% - 0.5px),
-        rgba(245,158,11,0.08) calc(50% - 0.5px),
-        rgba(245,158,11,0.08) calc(50% + 0.5px),
-        transparent calc(50% + 0.5px)
-      );
+      background:
+        linear-gradient(
+          -8deg,
+          transparent calc(50% - 0.5px),
+          rgba(245,158,11,0.18) calc(50% - 0.5px),
+          rgba(245,158,11,0.18) calc(50% + 0.5px),
+          transparent calc(50% + 0.5px)
+        ),
+        linear-gradient(
+          -8deg,
+          transparent calc(50% - 6px),
+          rgba(245,158,11,0.05) calc(50% - 6px),
+          rgba(245,158,11,0.05) calc(50% + 6px),
+          transparent calc(50% + 6px)
+        );
+      filter: blur(0.4px);
       pointer-events: none;
       z-index: -1;
     }
@@ -77,9 +90,9 @@
     .mono  { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
 
     .container {
-      max-width: 760px;
+      max-width: 820px;
       margin: 0 auto;
-      padding: 96px 32px 64px;
+      padding: 96px 36px 64px;
       position: relative;
       z-index: 1;
     }
@@ -190,7 +203,7 @@
     .project {
       border: 1px solid var(--border);
       background: var(--bg-card);
-      padding: 24px 28px;
+      padding: 30px 34px;
       text-decoration: none;
       color: inherit;
       display: block;
