@@ -26,23 +26,24 @@ body {
   width: ${size}px;
   height: ${size}px;
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: center;
+  padding-top: ${size * 0.05}px;
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 900;
   letter-spacing: -${size * 0.012}px;
 }
 .p {
-  font-size: ${size * 0.78}px;
+  font-size: ${size * 0.55}px;
   color: #fafafa;
   line-height: 1;
+  margin-right: ${size * 0.008}px;
 }
 .e {
-  font-size: ${size * 0.42}px;
+  font-size: ${size * 0.55}px;
   color: #f59e0b;
   line-height: 1;
-  margin-left: ${size * 0.02}px;
-  margin-bottom: ${size * 0.04}px;
+  margin-top: ${size * 0.275}px;
 }
 </style></head><body>
 <div class="wrap">
@@ -77,8 +78,7 @@ const renderTo = async (size, filename, opts = {}) => {
   console.log(`✓ ${filename}`);
 };
 
-// Standard favicon (transparent, works on any browser tab background)
-await renderTo(32, "favicon-32.png");
+// Standard favicon set (transparent, works on any browser tab background)
 await renderTo(192, "icon-192.png");
 await renderTo(512, "icon-512.png");
 
