@@ -3,164 +3,198 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pavel Espitia — AI + Blockchain Developer</title>
-  <meta name="description" content="Full-stack TypeScript developer building AI-powered tools for Web3. Smart contract security, LLM integrations, and developer tooling.">
-  <meta property="og:title" content="Pavel Espitia — AI + Blockchain Developer">
-  <meta property="og:description" content="Full-stack TypeScript developer building AI-powered tools for Web3.">
+  <title>Pavel Espitia — Senior Web3 + AI Engineer</title>
+  <meta name="description" content="Senior software engineer specialising in Web3 and AI. Smart contract security, natural-language EVM interfaces, and developer tooling. 18 years full-stack.">
+  <meta property="og:title" content="Pavel Espitia — Senior Web3 + AI Engineer">
+  <meta property="og:description" content="Senior software engineer specialising in Web3 and AI. Smart contract security, natural-language EVM interfaces, and developer tooling.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://pavelespitia.github.io">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --green: #00ff88;
-      --green-dim: #00cc6a;
-      --green-dark: #00ff8815;
-      --cyan: #00e5ff;
-      --magenta: #ff00ff;
-      --amber: #ffbb00;
-      --bg: #0a0a0a;
-      --bg-card: #0f0f0f;
-      --border: #1a1a1a;
-      --text: #b0b0b0;
-      --text-dim: #555;
+      --bg: #050505;
+      --bg-tint: #0d0a06;
+      --bg-card: #0a0807;
+      --bg-card-hover: #14100b;
+      --border: #1f1c17;
+      --border-strong: #2a2520;
+      --amber: #f59e0b;
+      --amber-dim: #c87a08;
+      --amber-soft: #fbbf24;
+      --text: #e5e5e5;
+      --text-dim: #a1a1aa;
+      --text-muted: #71717a;
+      --text-faint: #525252;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: "JetBrains Mono", monospace;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.65;
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Scanline overlay */
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,255,136,0.015) 2px,
-        rgba(0,255,136,0.015) 4px
-      );
-      pointer-events: none;
-      z-index: 999;
-    }
-
-    /* Grid background */
+    /* Atmospheric background — radial amber glows + base gradient */
     body::before {
       content: "";
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image:
-        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(245,158,11,0.10) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 80%, rgba(245,158,11,0.05) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-tint) 0%, var(--bg) 100%);
+      z-index: -2;
     }
+
+    /* Diagonal fracture line — decorative, subtle */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        -8deg,
+        transparent calc(50% - 0.5px),
+        rgba(245,158,11,0.08) calc(50% - 0.5px),
+        rgba(245,158,11,0.08) calc(50% + 0.5px),
+        transparent calc(50% + 0.5px)
+      );
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .serif { font-family: "Playfair Display", Georgia, serif; }
+    .mono  { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
 
     .container {
       max-width: 760px;
       margin: 0 auto;
-      padding: 48px 24px;
+      padding: 96px 32px 64px;
       position: relative;
       z-index: 1;
     }
 
     /* Header */
     .header {
-      margin-bottom: 48px;
-      padding-bottom: 24px;
+      margin-bottom: 96px;
+      padding-bottom: 36px;
       border-bottom: 1px solid var(--border);
     }
 
-    .prompt {
-      color: var(--text-dim);
-      font-size: 0.8rem;
-      margin-bottom: 4px;
+    .case-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--green);
-      text-shadow: 0 0 20px rgba(0,255,136,0.3);
-      margin-bottom: 4px;
+    .case-tag .dot {
+      width: 8px; height: 8px;
+      background: var(--amber);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(245,158,11,0.6);
+    }
+
+    h1.name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    h1.name .accent {
+      color: var(--amber);
     }
 
     .subtitle {
-      color: var(--text-dim);
+      font-family: "JetBrains Mono", monospace;
       font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      max-width: 560px;
     }
 
-    .cursor {
-      display: inline-block;
-      width: 8px;
-      height: 16px;
-      background: var(--green);
-      margin-left: 4px;
-      animation: blink 1s step-end infinite;
-      vertical-align: middle;
+    .subtitle .pipe {
+      color: var(--border-strong);
+      margin: 0 8px;
     }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+    .subtitle .em {
+      color: var(--amber);
     }
 
     /* Sections */
     .section {
-      margin-bottom: 40px;
+      margin-bottom: 80px;
     }
 
-    .section h2 {
-      font-size: 0.75rem;
+    .section-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--cyan);
-      margin-bottom: 16px;
+      color: var(--amber);
+      margin-bottom: 28px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 14px;
     }
 
-    .section h2::before {
-      content: ">";
-      color: var(--green);
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-strong) 0%, transparent 100%);
     }
 
     .bio {
+      font-size: 1.05rem;
+      line-height: 1.7;
       color: var(--text);
-      font-size: 0.85rem;
-      max-width: 600px;
+      max-width: 640px;
     }
 
-    .bio .highlight {
-      color: var(--green);
+    .bio + .bio {
+      margin-top: 18px;
+    }
+
+    .bio .accent {
+      color: var(--amber);
+      font-weight: 500;
     }
 
     /* Projects */
     .projects {
       display: grid;
-      gap: 12px;
+      gap: 14px;
     }
 
     .project {
       border: 1px solid var(--border);
       background: var(--bg-card);
-      padding: 16px 20px;
+      padding: 24px 28px;
       text-decoration: none;
       color: inherit;
       display: block;
-      transition: all 0.2s;
+      transition: all 0.25s ease;
       position: relative;
     }
 
@@ -168,274 +202,358 @@
       content: "";
       position: absolute;
       left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: var(--green);
-      opacity: 0;
-      transition: opacity 0.2s;
+      width: 3px;
+      background: var(--amber);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.25s ease;
     }
 
     .project:hover {
-      border-color: var(--green-dim);
-      background: var(--green-dark);
+      border-color: var(--border-strong);
+      background: var(--bg-card-hover);
     }
 
     .project:hover::before {
-      opacity: 1;
+      transform: scaleY(1);
     }
 
     .project-header {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
+      gap: 14px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
 
     .project-name {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: #e0e0e0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 800;
+      font-size: 1.45rem;
+      letter-spacing: -0.5px;
+      color: var(--text);
     }
 
-    .project-badge {
+    .project-badges {
+      display: flex;
+      gap: 6px;
+    }
+
+    .badge {
+      font-family: "JetBrains Mono", monospace;
       font-size: 0.65rem;
-      padding: 1px 7px;
-      border: 1px solid;
-      font-weight: 700;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      padding: 3px 9px;
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
     }
 
-    .badge-ai { border-color: var(--green-dim); color: var(--green); }
-    .badge-security { border-color: var(--amber); color: var(--amber); }
-    .badge-web3 { border-color: var(--magenta); color: var(--magenta); }
+    .badge.amber {
+      border-color: var(--amber-dim);
+      color: var(--amber-soft);
+    }
 
     .project-desc {
       color: var(--text-dim);
-      font-size: 0.8rem;
+      font-size: 0.95rem;
       line-height: 1.6;
+      max-width: 600px;
     }
 
     /* Stack */
     .stack {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
     }
 
-    .stack-tag {
-      border: 1px solid var(--border);
+    .chip {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
       color: var(--text-dim);
-      padding: 3px 10px;
-      font-size: 0.75rem;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
       transition: all 0.2s;
+      cursor: default;
     }
 
-    .stack-tag:hover {
-      border-color: var(--green-dim);
-      color: var(--green);
+    .chip:hover {
+      border-color: var(--amber-dim);
+      color: var(--amber-soft);
+      background: rgba(245,158,11,0.04);
     }
 
     /* Posts */
     .posts {
       list-style: none;
+      display: grid;
+      gap: 20px;
     }
 
     .posts li {
-      margin-bottom: 12px;
-      padding-left: 16px;
+      padding-left: 24px;
       position: relative;
     }
 
     .posts li::before {
-      content: "$";
+      content: "▸";
       position: absolute;
       left: 0;
-      color: var(--green);
+      top: 1px;
+      color: var(--amber);
       font-size: 0.85rem;
     }
 
     .posts a {
-      color: var(--cyan);
+      font-family: "Playfair Display", Georgia, serif;
+      color: var(--text);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 1.1rem;
+      letter-spacing: -0.2px;
+      transition: color 0.2s;
+      display: block;
+      line-height: 1.4;
     }
 
     .posts a:hover {
-      text-decoration: underline;
-      text-shadow: 0 0 8px rgba(0,229,255,0.3);
+      color: var(--amber-soft);
     }
 
-    .posts .post-meta {
-      color: var(--text-dim);
+    .post-meta {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--text-faint);
       font-size: 0.7rem;
-      margin-top: 2px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 6px;
     }
 
-    /* Links */
+    /* Links grid */
     .links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
     }
 
-    .links a {
+    .link-card {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
       color: var(--text-dim);
       text-decoration: none;
-      font-size: 0.8rem;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
       transition: all 0.2s;
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .links a::before {
-      content: "[";
-      color: var(--green-dim);
+    .link-card::after {
+      content: "→";
+      color: var(--text-faint);
+      transition: all 0.2s;
     }
 
-    .links a::after {
-      content: "]";
-      color: var(--green-dim);
+    .link-card:hover {
+      border-color: var(--amber-dim);
+      color: var(--amber-soft);
+      background: rgba(245,158,11,0.03);
     }
 
-    .links a:hover {
-      color: var(--green);
-      text-shadow: 0 0 8px rgba(0,255,136,0.3);
+    .link-card:hover::after {
+      color: var(--amber);
+      transform: translateX(3px);
     }
 
     /* Footer */
     footer {
       border-top: 1px solid var(--border);
-      padding-top: 20px;
-      margin-top: 40px;
-      color: var(--text-dim);
-      font-size: 0.7rem;
+      padding-top: 28px;
+      margin-top: 80px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+      text-transform: uppercase;
     }
 
     .status {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 10px;
     }
 
     .status-dot {
       width: 6px;
       height: 6px;
-      background: var(--green);
+      background: var(--amber);
       border-radius: 50%;
-      box-shadow: 0 0 6px var(--green);
-      animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 0 8px var(--amber);
+      animation: pulse 2.5s ease-in-out infinite;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      50% { opacity: 0.35; }
     }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 1.3rem; }
-      .container { padding: 32px 16px; }
-      footer { flex-direction: column; gap: 8px; }
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container { padding: 64px 24px 48px; }
+      h1.name { font-size: 3rem; letter-spacing: -1px; }
+      .header { margin-bottom: 64px; padding-bottom: 28px; }
+      .section { margin-bottom: 56px; }
+      .section-label { margin-bottom: 20px; }
+      .project { padding: 20px 22px; }
+      .project-name { font-size: 1.25rem; }
+      .posts a { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <div class="header">
-      <div class="prompt">visitor@pavelespitia:~$</div>
-      <h1>Pavel Espitia<span class="cursor"></span></h1>
-      <p class="subtitle">// full-stack AI + blockchain developer</p>
-    </div>
-
-    <div class="section">
-      <h2>About</h2>
-      <p class="bio">
-        I build developer tools at the intersection of
-        <span class="highlight">AI</span> and
-        <span class="highlight">blockchain</span>.
-        TypeScript by day, Solidity by night.
-        Based in <span class="highlight">Medellin, Colombia</span>.
-        Currently focused on AI-powered security tooling for smart contracts
-        and natural language interfaces for on-chain data.
+    <header class="header">
+      <div class="case-tag">
+        <span class="dot"></span>
+        <span>Senior · Web3 + AI · 18 yrs</span>
+      </div>
+      <h1 class="name">Pavel <span class="accent">Espitia</span>.</h1>
+      <p class="subtitle">
+        Smart contract security
+        <span class="pipe">·</span>
+        AI tooling
+        <span class="pipe">·</span>
+        Solidity <span class="em">/</span> TypeScript
       </p>
-    </div>
+    </header>
 
-    <div class="section">
-      <h2>Projects</h2>
+    <section class="section">
+      <div class="section-label">About</div>
+      <p class="bio">
+        For 18 years I've built the systems behind production software —
+        distributed Node.js architectures, full-stack TypeScript, and the
+        engineering discipline that keeps complex products shippable under
+        load. The last five years I've specialised in the intersection of
+        <span class="accent">Web3</span> and
+        <span class="accent">AI</span>, building security tooling for smart
+        contracts and natural-language interfaces over on-chain data.
+      </p>
+      <p class="bio">
+        Based in Medellín, Colombia. Remote-first since 2020. Open to
+        selective conversations about senior contracts.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">Projects</div>
       <div class="projects">
         <a href="https://github.com/pavelEspitia/spectr-ai" class="project">
           <div class="project-header">
             <span class="project-name">spectr-ai</span>
-            <span class="project-badge badge-ai">AI</span>
-            <span class="project-badge badge-security">Security</span>
+            <div class="project-badges">
+              <span class="badge amber">AI</span>
+              <span class="badge">Security</span>
+            </div>
           </div>
           <p class="project-desc">
-            AI-powered smart contract security auditor. CLI + web app that analyzes
-            Solidity and Vyper contracts using Claude or local models. Outputs
-            color-coded reports with code fixes, SARIF for CI, and HTML reports.
+            AI-powered smart contract security auditor. CLI and web app that
+            analyse Solidity and Vyper contracts using Claude or local Ollama
+            models. Outputs JSON, SARIF for GitHub Code Scanning, and styled
+            HTML reports. Open source, paid API tier.
           </p>
         </a>
 
         <a href="https://github.com/pavelEspitia/abilens" class="project">
           <div class="project-header">
             <span class="project-name">AbiLens</span>
-            <span class="project-badge badge-ai">AI</span>
-            <span class="project-badge badge-web3">Web3</span>
+            <div class="project-badges">
+              <span class="badge amber">AI</span>
+              <span class="badge">Web3</span>
+            </div>
           </div>
           <p class="project-desc">
-            Chat with any EVM smart contract in natural language. Paste an address,
-            ask questions, read on-chain state. Auto-resolves ABIs from Etherscan
-            or reconstructs from bytecode.
+            Natural-language interface to any EVM smart contract across six
+            chains. Layered ABI resolution combining Etherscan and whatsabi
+            bytecode reconstruction. Turns an unverified contract from a
+            research problem into a thirty-second conversation.
           </p>
         </a>
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <h2>Stack</h2>
+    <section class="section">
+      <div class="section-label">Stack</div>
       <div class="stack">
-        <span class="stack-tag">TypeScript</span>
-        <span class="stack-tag">Solidity</span>
-        <span class="stack-tag">React</span>
-        <span class="stack-tag">Next.js</span>
-        <span class="stack-tag">Node.js</span>
-        <span class="stack-tag">Viem</span>
-        <span class="stack-tag">Claude API</span>
-        <span class="stack-tag">Ollama</span>
-        <span class="stack-tag">Vyper</span>
-        <span class="stack-tag">Hardhat</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">Solidity</span>
+        <span class="chip">Foundry</span>
+        <span class="chip">Hardhat</span>
+        <span class="chip">viem</span>
+        <span class="chip">Next.js</span>
+        <span class="chip">Node.js</span>
+        <span class="chip">Anthropic Claude</span>
+        <span class="chip">Ollama</span>
+        <span class="chip">Vyper</span>
+        <span class="chip">whatsabi</span>
+        <span class="chip">EVM</span>
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <h2>Writing</h2>
+    <section class="section">
+      <div class="section-label">Writing</div>
       <ul class="posts">
+        <li>
+          <a href="https://dev.to/pavelespitia/how-to-run-llms-locally-with-ollama-a-developers-guide">
+            How to Run LLMs Locally with Ollama — A Developer's Guide
+          </a>
+          <div class="post-meta">dev.to · 400+ reads</div>
+        </li>
+        <li>
+          <a href="https://dev.to/pavelespitia/function-calling-with-ollama-make-your-local-llm-run-real-tools">
+            Function Calling with Ollama: Make Your Local LLM Run Real Tools
+          </a>
+          <div class="post-meta">dev.to · 2026</div>
+        </li>
+        <li>
+          <a href="https://dev.to/pavelespitia/solidity-vs-vyper-security-differences-every-auditor-should-know">
+            Solidity vs Vyper: Security Differences Every Auditor Should Know
+          </a>
+          <div class="post-meta">dev.to · 2026</div>
+        </li>
         <li>
           <a href="https://dev.to/pavelespitia/i-built-an-ai-smart-contract-auditor-in-a-weekend-heres-how-2kkn">
             I Built an AI Smart Contract Auditor in a Weekend
           </a>
-          <div class="post-meta">dev.to // April 2026</div>
+          <div class="post-meta">dev.to · 2026</div>
         </li>
       </ul>
-    </div>
+    </section>
 
-    <div class="section">
-      <h2>Links</h2>
+    <section class="section">
+      <div class="section-label">Find me</div>
       <div class="links">
-        <a href="https://github.com/pavelEspitia">GitHub</a>
-        <a href="/blog/">Blog</a>
-        <a href="https://dev.to/pavelespitia">dev.to</a>
-        <a href="https://pavelespitia.hashnode.dev">Hashnode</a>
-        <a href="https://noctis.lemonsqueezy.com">Store</a>
+        <a class="link-card" href="https://github.com/pavelEspitia">GitHub</a>
+        <a class="link-card" href="https://www.linkedin.com/in/pavelespitia">LinkedIn</a>
+        <a class="link-card" href="https://dev.to/pavelespitia">dev.to</a>
+        <a class="link-card" href="https://pavelespitia.hashnode.dev">Hashnode</a>
+        <a class="link-card" href="/blog/">Blog</a>
+        <a class="link-card" href="mailto:pavelespitia@gmail.com">Email</a>
       </div>
-    </div>
+    </section>
 
     <footer>
-      <span>Pavel Espitia // Medellin, Colombia</span>
+      <span>Medellín · Colombia · Remote</span>
       <span class="status">
         <span class="status-dot"></span>
-        available for work
+        <span>Shipping</span>
       </span>
     </footer>
 
