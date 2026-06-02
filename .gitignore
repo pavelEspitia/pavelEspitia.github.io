@@ -1,1 +1,7 @@
 node_modules/
+
+# direnv
+.envrc
+
+# AI-generated cover backgrounds (intermediate art, ~2MB each; final covers are committed)
+covers/bg/

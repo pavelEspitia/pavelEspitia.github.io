@@ -1,0 +1,122 @@
+[
+  {
+    "day": 16,
+    "title": "Run Coding LLMs\nLocally",
+    "subtitle": "Your free 2026 AI pair programmer",
+    "command": "$ ollama run qwen2.5-coder",
+    "tags": [{ "label": "AI", "color": "ai" }, { "label": "Tutorial", "color": "ts" }],
+    "motif": "abstract emerald-green neural mesh of glowing connected nodes and flowing data lines, local-first computing feel"
+  },
+  {
+    "day": 17,
+    "title": "A Local AI\nCode Reviewer",
+    "subtitle": "Catch bugs before your team does",
+    "command": "$ git diff | ollama review",
+    "tags": [{ "label": "AI", "color": "ai" }, { "label": "TypeScript", "color": "ts" }],
+    "motif": "abstract green data streams flowing over faint geometric code blocks, diff-style parallel lines"
+  },
+  {
+    "day": 18,
+    "title": "Structured Output\nFrom Local LLMs",
+    "subtitle": "JSON that never breaks (Ollama + Zod)",
+    "command": "$ ollama --format json",
+    "tags": [{ "label": "TypeScript", "color": "ts" }, { "label": "AI", "color": "ai" }],
+    "motif": "abstract cyan and green crystalline lattice suggesting nested brackets and structured data, sharp clean facets"
+  },
+  {
+    "day": 19,
+    "title": "How Much RAM for\nLocal LLMs?",
+    "subtitle": "2026 benchmarks by model size",
+    "command": "$ ollama ps",
+    "tags": [{ "label": "AI", "color": "ai" }, { "label": "Beginner", "color": "ts" }],
+    "motif": "abstract glowing green memory-chip circuitry with rising bar-graph light columns, hardware feel"
+  },
+  {
+    "day": 20,
+    "title": "Safe Filesystem\nAccess for LLMs",
+    "subtitle": "Ollama tool use without getting burned",
+    "command": "$ tool('read_file')",
+    "tags": [{ "label": "AI", "color": "ai" }, { "label": "Security", "color": "security" }],
+    "motif": "abstract amber and green glowing shield over a faint file-tree network, protective security feel"
+  },
+  {
+    "day": 21,
+    "title": "I Replaced My\n$20/mo AI Tools",
+    "subtitle": "My full local-first stack",
+    "command": "$ ollama serve",
+    "tags": [{ "label": "AI", "color": "ai" }, { "label": "Productivity", "color": "ts" }],
+    "motif": "abstract emerald glow with an unplugged cloud dissolving into local glowing nodes, freedom feel"
+  },
+  {
+    "day": 22,
+    "title": "Reentrancy\nin 2026",
+    "subtitle": "Why it still drains millions, and how AI spots it",
+    "command": "$ forge test --match Reentrancy",
+    "tags": [{ "label": "Web3", "color": "web3" }, { "label": "Security", "color": "security" }, { "label": "AI", "color": "ai" }],
+    "motif": "abstract magenta and amber recursive looping spiral draining into a dark vault, ominous blockchain feel"
+  },
+  {
+    "day": 23,
+    "title": "Access Control\nBugs",
+    "subtitle": "The #1 cause of smart contract hacks",
+    "command": "modifier onlyOwner",
+    "tags": [{ "label": "Web3", "color": "web3" }, { "label": "Security", "color": "security" }],
+    "motif": "abstract amber broken padlock made of glowing circuit traces, magenta accents, security breach feel"
+  },
+  {
+    "day": 24,
+    "title": "Auditing Without\nSource Code",
+    "subtitle": "Reading EVM bytecode",
+    "command": "$ eth_getCode 0x...",
+    "tags": [{ "label": "Web3", "color": "web3" }, { "label": "Security", "color": "security" }, { "label": "AI", "color": "ai" }],
+    "motif": "abstract magenta hexadecimal byte streams decoding into faint green structured patterns, reverse-engineering feel"
+  },
+  {
+    "day": 25,
+    "title": "Foundry Invariant\nTesting",
+    "subtitle": "Find bugs fuzzing can't",
+    "command": "$ forge test --match invariant",
+    "tags": [{ "label": "Web3", "color": "web3" }, { "label": "Security", "color": "security" }],
+    "motif": "abstract amber and magenta property-graph network surrounded by a field of fuzzing particles, testing feel"
+  },
+  {
+    "day": 26,
+    "title": "The Auditor's\nAI Workflow",
+    "subtitle": "Using LLMs without trusting them",
+    "command": "$ spectr-ai + human review",
+    "tags": [{ "label": "AI", "color": "ai" }, { "label": "Security", "color": "security" }],
+    "motif": "abstract green and amber magnifying lens hovering over faint glowing code, careful inspection feel"
+  },
+  {
+    "day": 27,
+    "title": "Streaming LLM\nTokens to the Browser",
+    "subtitle": "The production SSE setup",
+    "command": "return new ReadableStream()",
+    "tags": [{ "label": "Next.js", "color": "ts" }, { "label": "React", "color": "ai" }],
+    "motif": "abstract cyan light-trail tokens flowing left to right in a stream, motion and speed feel"
+  },
+  {
+    "day": 28,
+    "title": "Type-Safe API\nClients",
+    "subtitle": "No code generator required",
+    "command": "apiFetch<T>(url, schema)",
+    "tags": [{ "label": "TypeScript", "color": "ts" }, { "label": "WebDev", "color": "ai" }],
+    "motif": "abstract cyan geometric typed-pipeline lattice with clean connected conduits, type-safety feel"
+  },
+  {
+    "day": 29,
+    "title": "The Fake Job\nInterview Repo",
+    "subtitle": "How it tried to steal my keys",
+    "command": "$ npm install  # don't",
+    "tags": [{ "label": "Security", "color": "security" }, { "label": "JavaScript", "color": "ts" }],
+    "motif": "abstract amber and deep-red warning glow around a dark trojan package box leaking faint streams, threat feel"
+  },
+  {
+    "day": 30,
+    "title": "Scan npm for\nMalware",
+    "subtitle": "Before you install, without running it",
+    "command": "$ npm install --ignore-scripts",
+    "tags": [{ "label": "Security", "color": "security" }, { "label": "JavaScript", "color": "ts" }],
+    "motif": "abstract amber scanner grid sweeping across faint stacked package boxes, inspection beam feel"
+  }
+]
