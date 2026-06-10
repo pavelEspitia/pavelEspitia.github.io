@@ -1,0 +1,34 @@
+name: dev.to daily publish
+
+# Publishes the oldest unpublished dev.to draft once a day, so the content
+# cadence runs on GitHub's infra (independent of any local machine). Stops
+# cleanly when no drafts remain. Trigger manually via the Actions tab too.
+on:
+  schedule:
+    - cron: "3 14 * * *" # ~09:03 America/Bogota (14:03 UTC), off-minute
+  workflow_dispatch: {}
+
+permissions: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish next draft
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+        run: |
+          set -euo pipefail
+          drafts=$(curl -fsS "https://dev.to/api/articles/me/unpublished?per_page=50" \
+            -H "api-key: ${DEVTO_API_KEY}")
+          id=$(printf '%s' "$drafts" | jq -r 'sort_by(.created_at) | .[0].id // empty')
+          if [ -z "${id}" ]; then
+            echo "No unpublished drafts remaining."
+            exit 0
+          fi
+          title=$(printf '%s' "$drafts" | jq -r 'sort_by(.created_at) | .[0].title')
+          curl -fsS -X PUT "https://dev.to/api/articles/${id}" \
+            -H "api-key: ${DEVTO_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d '{"article":{"published":true}}' > /dev/null
+          echo "Published: ${title} (id: ${id})"
