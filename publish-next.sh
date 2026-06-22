@@ -4,9 +4,12 @@ set -euo pipefail
 # Publishes the next unpublished dev.to draft.
 # Run daily via cron: 0 9 * * * /path/to/publish-next.sh
 #
-# Requires: DEVTO_API_KEY env var
+# Requires: DEVTO_API_KEY (loaded from ~/.config/secrets/secrets.env via the central loader)
 
-DEVTO_API_KEY="${DEVTO_API_KEY:?Set DEVTO_API_KEY}"
+# shellcheck disable=SC1091  # central loader is user-provisioned at runtime
+. "${HOME}/.config/secrets/load.sh"
+
+DEVTO_API_KEY="${DEVTO_API_KEY:?Set DEVTO_API_KEY in ~/.config/secrets/secrets.env}"
 
 # Get all unpublished articles
 drafts=$(curl -s "https://dev.to/api/articles/me/unpublished?per_page=50" \
