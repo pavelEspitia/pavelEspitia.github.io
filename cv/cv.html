@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Pavel Espitia · CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink: #1c1917;
+      --ink-dim: #44403c;
+      --ink-muted: #78716c;
+      --amber: #b45309;
+      --line: #e7e5e4;
+    }
+
+    @page { size: A4; margin: 0; }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--ink);
+      font-size: 9.5pt;
+      line-height: 1.5;
+      background: #ffffff;
+    }
+
+    .page { padding: 40px 46px; }
+
+    .mono { font-family: "JetBrains Mono", monospace; }
+
+    /* Header */
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+
+    .head h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 900;
+      font-size: 23pt;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+    }
+
+    .head h1 .accent { color: var(--amber); }
+
+    .head .role {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7.5pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-top: 6px;
+    }
+
+    .head .contact {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7pt;
+      text-align: right;
+      color: var(--ink-dim);
+      line-height: 1.8;
+    }
+
+    .head .contact a { color: var(--ink-dim); text-decoration: none; }
+
+    /* Sections */
+    h2 {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7.5pt;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin: 16px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+    .summary { color: var(--ink-dim); max-width: 100%; }
+    .summary strong { color: var(--ink); font-weight: 600; }
+
+    /* Audited work */
+    .audit {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .audit:last-of-type { border-bottom: none; }
+
+    .audit .ref {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7pt;
+      color: var(--ink-muted);
+      padding-top: 2px;
+    }
+
+    .audit .what strong { font-weight: 600; }
+    .audit .what { color: var(--ink-dim); }
+    .audit .link {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 6.8pt;
+      color: var(--amber);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    /* Experience */
+    .job { margin-bottom: 10px; page-break-inside: avoid; }
+
+    .job-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .job-title { font-weight: 600; font-size: 10pt; }
+    .job-title .org { font-weight: 400; color: var(--ink-dim); }
+
+    .job-dates {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7pt;
+      color: var(--ink-muted);
+      white-space: nowrap;
+    }
+
+    .job p { color: var(--ink-dim); margin-top: 2px; }
+
+    /* Products */
+    .products { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
+    .product { color: var(--ink-dim); }
+    .product strong { color: var(--ink); font-weight: 600; }
+    .product .link {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 6.8pt;
+      color: var(--amber);
+      text-decoration: none;
+    }
+
+    /* Two-col foot area */
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+
+    .item { margin-bottom: 6px; color: var(--ink-dim); }
+    .item strong { color: var(--ink); font-weight: 600; }
+    .item .meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 7pt;
+      color: var(--ink-muted);
+    }
+
+    .chips { color: var(--ink-dim); }
+
+    .foot {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 6.8pt;
+      color: var(--ink-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header class="head">
+      <div>
+        <h1>Pavel <span class="accent">Espitia</span></h1>
+        <div class="role">Senior Smart Contract Engineer · Security · AI</div>
+      </div>
+      <div class="contact">
+        pavel@noctis.biz<br>
+        <a href="https://pavelespitia.github.io">pavelespitia.github.io</a><br>
+        <a href="https://github.com/pavelEspitia">github.com/pavelEspitia</a> · <a href="https://www.linkedin.com/in/pavelespitia">linkedin.com/in/pavelespitia</a><br>
+        Medellín, Colombia · GMT-5 · Remote
+      </div>
+    </header>
+
+    <p class="summary">
+      Senior engineer with <strong>18 years</strong> shipping production software, the last
+      <strong>8 building and hardening Web3 protocols</strong>. Contract systems I architected were
+      taken through independent audits by <strong>STATEMIND</strong> (the firm that audits Lido,
+      Curve and Yearn), <strong>QuillAudits</strong> and <strong>storming0x</strong>. I also build
+      AI systems: agents, MCP servers, and LLM-powered security products, live today on the Chrome
+      Web Store and the web.
+    </p>
+
+    <h2>Audited work</h2>
+    <div class="audit">
+      <span class="ref">2024-01-17</span>
+      <div class="what">
+        <strong>DEGA ETH ISPO</strong>, the first Ethereum ISPO run through Lido: stETH staking,
+        reward accrual, withdraw anytime. Audited by STATEMIND.<br>
+        <a class="link" href="https://github.com/statemindio/public-audits/blob/main/Dega/2024-01-17_Dega_ISPO.pdf">github.com/statemindio/public-audits · Dega/2024-01-17_Dega_ISPO.pdf</a>
+      </div>
+    </div>
+    <div class="audit">
+      <span class="ref">2024</span>
+      <div class="what">
+        <strong>$DEGA token (ERC-20)</strong> with TypeScript deploy pipeline. Audited independently
+        by QuillAudits and storming0x.<br>
+        <a class="link" href="https://github.com/DEGAorg/ERC20">github.com/DEGAorg/ERC20 · /audit</a>
+      </div>
+    </div>
+    <div class="audit">
+      <span class="ref">2024-07-20</span>
+      <div class="what">
+        <strong>DEGA TGE claim</strong>, multi-chain claims via EIP-712 typed signatures with
+        cross-chain replay protection. OpenZeppelin v5, Hardhat + Foundry. Audited by storming0x.<br>
+        <a class="link" href="https://github.com/DEGAorg/TGE-claim-contract">github.com/DEGAorg/TGE-claim-contract · /audit</a>
+      </div>
+    </div>
+
+    <h2>Experience</h2>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Senior Software Engineer, Independent <span class="org">· Self-employed, remote</span></span>
+        <span class="job-dates">Jun 2023 · present</span>
+      </div>
+      <p>
+        Independent contract engineering for US clients. Web3 security and architecture: the DEGA
+        audited contracts above, game worlds operated by autonomous AI agents, a medical claim
+        system on the Midnight blockchain (Compact, pre-mainnet through mainnet), RWA tokenization
+        with Firepan, and MCP agent tooling that lets AI agents hold wallets and transact.
+      </p>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Senior Software Engineer, Contract <span class="org">· MILL5</span></span>
+        <span class="job-dates">Nov 2023 · present</span>
+      </div>
+      <p>
+        Quality-focused engineering for a US-based regulated medical-device product: requirement and
+        test-case reviews, defect triage, requirements traceability, release readiness in a
+        distributed team.
+      </p>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Blockchain Developer <span class="org">· FIWORK, full-time remote</span></span>
+        <span class="job-dates">Jun 2021 · Jun 2023</span>
+      </div>
+      <p>
+        Solidity contract architecture, cryptographic primitive design, dApp integration
+        (viem/ethers), audit preparation, and testing infrastructure for Web3 products.
+      </p>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Senior Software Developer <span class="org">· MILL5, full-time</span></span>
+        <span class="job-dates">Feb 2020 · Jun 2021</span>
+      </div>
+      <p>
+        Full-stack TypeScript, Node.js, .NET and distributed systems for US enterprise clients.
+      </p>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Senior Frontend Developer <span class="org">· PSL Corp, now Perficient</span></span>
+        <span class="job-dates">Feb 2019 · Feb 2020</span>
+      </div>
+      <p>
+        React and TypeScript architecture for financial services, healthcare and SaaS clients,
+        including Xtiva and SEON (Safe Fleet).
+      </p>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Frontend &amp; Blockchain Developer <span class="org">· Blocksize</span></span>
+        <span class="job-dates">Sep 2018 · Feb 2019</span>
+      </div>
+      <p>
+        eFIN DEX for TokenPay: non-custodial exchange with atomic swaps (BTC/LTC/ETH) routed over
+        Tor. Wallet UX, smart-contract integration, cryptographic primitives. First Web3 role.
+      </p>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <span class="job-title">Earlier roles <span class="org">· Globant (×2), Intertec, PraTech, Intergrupo, FoundationLab, PSL, Ecoinfo</span></span>
+        <span class="job-dates">2009 · 2018</span>
+      </div>
+      <p>
+        Full-stack, .NET and SharePoint engineering for Wells Fargo, Electronic Arts, the
+        Inter-American Development Bank, Deloitte, Bancolombia, Suramericana, Avianca, Ecopetrol,
+        and Nomis Solutions.
+      </p>
+    </div>
+
+    <h2>Security &amp; AI products (Noctis)</h2>
+    <div class="products">
+      <div class="product">
+        <strong>Argus</strong>, AI transaction firewall for crypto wallets.
+        <a class="link" href="https://chromewebstore.google.com/detail/argus/dbenlofanjfhpajaadgecbhgaaflccpg">Chrome Web Store</a>
+      </div>
+      <div class="product">
+        <strong>Argus Lens</strong>, static supply-chain malware scanner.
+        <a class="link" href="https://lens.noctis.biz">lens.noctis.biz</a>
+      </div>
+      <div class="product">
+        <strong>spectr-ai</strong>, AI smart contract auditor (Solidity + Vyper).
+        <a class="link" href="https://github.com/pavelEspitia/spectr-ai">github.com/pavelEspitia/spectr-ai</a>
+      </div>
+      <div class="product">
+        <strong>Scry</strong>, chat with any EVM contract across six chains.
+        <a class="link" href="https://scry.noctis.biz">scry.noctis.biz</a>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <h2>Honors</h2>
+        <div class="item">
+          <strong>Finalist, Smackathon (Blockchain Music Challenge)</strong><br>
+          <span class="meta">Top 10 finalists · Jul 2019 · smackathon.co</span>
+        </div>
+
+        <h2>Certifications</h2>
+        <div class="item">
+          <strong>MCPS: Microsoft Certified Professional</strong><br>
+          <span class="meta">Microsoft · 2012</span>
+        </div>
+        <div class="item">
+          <strong>MCTS: SharePoint 2010, Application Development</strong><br>
+          <span class="meta">Microsoft · 2012 · exam 70-573</span>
+        </div>
+
+        <h2>Education</h2>
+        <div class="item">
+          <strong>Técnico en Análisis y Desarrollo de Software</strong><br>
+          <span class="meta">Centro de Estudios Especializados CESDE · 2006 · 2008</span>
+        </div>
+      </div>
+      <div>
+        <h2>Stack</h2>
+        <p class="chips">
+          Solidity · TypeScript · Foundry (fuzz + invariant testing) · Hardhat · OpenZeppelin ·
+          EIP-712 · viem · The Graph · Node.js · Next.js · .NET · Midnight / Compact ·
+          LLM apps (Claude) · MCP servers · AI agents
+        </p>
+
+        <h2>Networks</h2>
+        <p class="chips">
+          Ethereum · BNB Chain · Optimism · Base · Arbitrum · Polygon · Midnight
+        </p>
+
+        <h2>Languages</h2>
+        <div class="item">Spanish, native · English, full professional proficiency</div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span>Pavel Espitia · pavel@noctis.biz</span>
+      <span>Updated July 2026 · verifiable links throughout</span>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -428,12 +428,23 @@
     .timeline-role { color: var(--text-dim); line-height: 1.6; }
     .timeline-role .org { color: var(--text-muted); }
 
+    .chips-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin: 28px 0 10px;
+    }
+
     .clients {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 26px;
     }
+
+    .chips-label + .clients { margin-top: 0; }
 
     .client-chip {
       font-family: "JetBrains Mono", monospace;
@@ -628,6 +639,7 @@
       </p>
       <div class="hero-cta rise d3">
         <a class="cta-button" href="mailto:pavel@noctis.biz">pavel@noctis.biz</a>
+        <a class="verify-link" href="cv/pavel-espitia-cv.pdf">CV · PDF</a>
         <span class="cta-side">Available for senior security engagements</span>
       </div>
     </header>
@@ -745,26 +757,23 @@
         Before Web3 I built software for banks, airlines, energy and
         healthcare, places where failure is expensive. Since 2018, protocols:
         the eFIN DEX for TokenPay (non-custodial atomic swaps routed over Tor,
-        2018 to 2019), token distribution on
-        <a href="https://tokentable.xyz">TokenTable</a>, Mojos DAO on Optimism,
+        2018 to 2019), token distribution on TokenTable,
+        <a href="https://getmojos.com/">Mojos DAO</a> on Optimism,
         real-world asset tokenization with Firepan, and
         <a href="https://midnight.network">Midnight</a>, where I have been
         building in Compact since before its March 2026 mainnet.
       </p>
       <p class="bio">
-        The AI thread runs through all of it. With
-        <a href="https://www.dega.org/agents">DEGA</a> I worked on DegaGame, a
-        tick-based game world operated by AI agents over WebSocket, and on
-        agent tooling for Midnight such as
-        <a href="https://github.com/DEGAorg/midnight-mcp">midnight-mcp</a>,
-        an MCP server that lets AI agents hold wallets and transact. The
-        HITChain work on Midnight was engineered with AI-assisted workflows
-        end to end.
+        The AI thread runs through all of it: game worlds operated by
+        <strong>autonomous AI agents</strong>, MCP servers that let agents
+        hold wallets and transact on Midnight, and a
+        <strong>medical claim system on the Midnight blockchain</strong>,
+        engineered end to end with AI-assisted workflows.
       </p>
       <div class="timeline">
         <div class="timeline-row">
           <span class="timeline-years">2023 · now</span>
-          <span class="timeline-role">Independent senior engineer <span class="org">· Web3 security and architecture for US clients · DEGA, DegaGame AI agents, HITChain on Midnight, RWA tokenization</span></span>
+          <span class="timeline-role">Independent senior engineer <span class="org">· Web3 security and architecture for US clients · DEGA, autonomous AI agents, medical claim system on Midnight, RWA tokenization</span></span>
         </div>
         <div class="timeline-row">
           <span class="timeline-years">2021 · 2023</span>
@@ -779,6 +788,17 @@
           <span class="timeline-role">Enterprise engineering <span class="org">· full-stack and .NET across banking, gaming, aviation and energy</span></span>
         </div>
       </div>
+      <div class="chips-label">Networks</div>
+      <div class="clients">
+        <span class="client-chip">Ethereum</span>
+        <span class="client-chip">BNB Chain</span>
+        <span class="client-chip">Optimism</span>
+        <span class="client-chip">Base</span>
+        <span class="client-chip">Arbitrum</span>
+        <span class="client-chip">Polygon</span>
+        <span class="client-chip">Midnight</span>
+      </div>
+      <div class="chips-label">Enterprise clients</div>
       <div class="clients">
         <span class="client-chip">Wells Fargo</span>
         <span class="client-chip">Electronic Arts</span>
@@ -892,6 +912,7 @@
       </p>
       <a class="contact-email" href="mailto:pavel@noctis.biz">pavel@noctis.biz</a>
       <div class="links">
+        <a class="link-card" href="cv/pavel-espitia-cv.pdf">CV · PDF</a>
         <a class="link-card" href="https://github.com/pavelEspitia">GitHub</a>
         <a class="link-card" href="https://www.linkedin.com/in/pavelespitia">LinkedIn</a>
         <a class="link-card" href="https://dev.to/pavelespitia">dev.to</a>
