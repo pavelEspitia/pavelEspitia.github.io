@@ -1,0 +1,36 @@
+name: Verify links
+
+on:
+  schedule:
+    - cron: "0 11 * * 1" # Mondays 11:00 UTC (06:00 Medellín)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: 22
+
+      - name: Verify every external link in index.html
+        run: node scripts/verify-links.mjs
+
+      - name: Commit refreshed verification date
+        run: |
+          if git diff --quiet index.html; then
+            echo "Date already current; nothing to commit."
+            exit 0
+          fi
+          git config user.name "link-verifier[bot]"
+          git config user.email "link-verifier@noctis.biz"
+          git add index.html
+          git commit -m "Refresh 'Links verified' date after successful link check"
+          git push
