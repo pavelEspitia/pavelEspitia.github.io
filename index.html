@@ -144,11 +144,25 @@
 
     .name .accent { color: var(--amber); }
 
-    .id-role {
+    .site-nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .site-nav a {
       font-family: "JetBrains Mono", monospace;
       font-size: 0.78rem;
+      letter-spacing: 0.04em;
       color: var(--ink-muted);
+      text-decoration: none;
+      padding: 4px 0;
+      transition: color 0.18s ease;
     }
+
+    .site-nav a:hover { color: var(--amber-bright); }
+
+    .section, footer { scroll-margin-top: 28px; }
 
     h1.thesis {
       font-stretch: 125%;
@@ -200,7 +214,25 @@
       cursor: pointer;
       padding: 14px 26px;
       font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 220px;
       transition: background 0.18s ease, transform 0.16s var(--ease-out);
+    }
+
+    .copy-icon { flex-shrink: 0; }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
 
     .cta-button:hover { background: var(--amber-bright); }
@@ -736,7 +768,12 @@
     <header class="header">
       <div class="id-line rise">
         <span class="name">Pavel <span class="accent">Espitia</span></span>
-        <span class="id-role">Smart contract security · AI engineering</span>
+        <nav class="site-nav" aria-label="Sections">
+          <a href="#h-ledger">Ledger</a>
+          <a href="#h-products">Products</a>
+          <a href="#h-background">Background</a>
+          <a href="#h-contact">Contact</a>
+        </nav>
       </div>
       <h1 class="thesis rise d1">
         I build smart contracts that
@@ -753,13 +790,100 @@
         on this page, link to their sources.
       </p>
       <div class="hero-cta rise d3">
-        <button class="cta-button copy-email" data-email="pavel@noctis.biz" type="button">pavel@noctis.biz ⧉</button>
+        <button class="cta-button copy-email" data-email="pavel@noctis.biz" type="button">
+          <span class="copy-label">pavel@noctis.biz</span>
+          <svg class="copy-icon" width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><rect x="4.2" y="4.2" width="7.6" height="7.6" stroke="currentColor" stroke-width="1.4"/><path d="M8.8 4V1.2H1.2v7.6H4" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
         <a class="cta-download" href="cv/pavel-espitia-cv.pdf">CV · PDF</a>
         <span class="cta-side">Available for senior security engagements</span>
       </div>
     </header>
 
     <main id="main">
+
+    <section class="section" aria-labelledby="h-ledger">
+      <h2 id="h-ledger">Don't trust. <span class="accent">Verify.</span></h2>
+      <p class="section-note">
+        Contracts I architected and shipped, with the third-party reports that
+        reviewed them. Open the PDFs.
+      </p>
+      <div class="ledger">
+        <div class="ledger-head">
+          <span class="ledger-title">Verification ledger</span>
+          <span class="ledger-stamp">4 public reports</span>
+        </div>
+        <article class="entry">
+          <div class="entry-ref">
+            <span class="entry-date">2024-01-17</span>
+            <span class="auditor">STATEMIND</span>
+            <span class="auditor-note">auditors of Lido, Curve, Yearn</span>
+          </div>
+          <div>
+            <h3>DEGA ETH ISPO</h3>
+            <p class="entry-desc">
+              The first Ethereum ISPO run through Lido: users stake stETH,
+              accrue rewards, and withdraw at any time. Non-custodial by
+              design.
+            </p>
+            <p class="entry-gloss">
+              In plain terms: a staking pool where users earn rewards without
+              ever handing over custody of their funds.
+            </p>
+            <div class="entry-links">
+              <a class="verify-link" href="https://github.com/statemindio/public-audits/blob/main/Dega/2024-01-17_Dega_ISPO.pdf" aria-label="DEGA ETH ISPO audit report by STATEMIND, PDF">Audit report</a>
+              <a class="code-link" href="https://github.com/DEGAorg/DEGA-ETH-ISPO" aria-label="DEGA ETH ISPO source code on GitHub">source</a>
+              <a class="code-link" href="https://etherscan.io/address/0x01ed03186D77698271AA316b0B29B99B1099465b" aria-label="DEGA ETH ISPO deployed contract on Etherscan">deployed</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="entry-ref">
+            <span class="entry-date">2024</span>
+            <span class="auditor">QuillAudits + storming0x</span>
+            <span class="auditor-note">two independent reviews</span>
+          </div>
+          <div>
+            <h3>$DEGA token</h3>
+            <p class="entry-desc">
+              The ERC-20 behind the DEGA ecosystem, with its TypeScript deploy
+              pipeline. Reviewed independently by two auditors.
+            </p>
+            <div class="entry-links">
+              <a class="verify-link" href="https://github.com/DEGAorg/ERC20/blob/main/audit/DegaTokenContractAuditReport-QuillAudits.pdf">QuillAudits report</a>
+              <a class="verify-link" href="https://github.com/DEGAorg/ERC20/blob/main/audit/DegaToken_Audit_Report_By_storming0x.pdf">storming0x report</a>
+              <a class="code-link" href="https://github.com/DEGAorg/ERC20" aria-label="$DEGA token source code on GitHub">source</a>
+              <a class="code-link" href="https://etherscan.io/token/0x97aee01ed2aabad9f54692f94461ae761d225f17" aria-label="$DEGA token deployed contract on Etherscan">deployed</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="entry-ref">
+            <span class="entry-date">2024-07-20</span>
+            <span class="auditor">storming0x</span>
+            <span class="auditor-note">Yearn security researcher</span>
+          </div>
+          <div>
+            <h3>DEGA TGE claim</h3>
+            <p class="entry-desc">
+              Multi-chain token claims authorized by EIP-712 typed signatures,
+              with replay protection across chains and contracts. OpenZeppelin
+              v5, tested under Hardhat and Foundry.
+            </p>
+            <p class="entry-gloss">
+              In plain terms: users claim tokens on several chains with signed
+              permissions that cannot be copied from one chain to another.
+            </p>
+            <div class="entry-links">
+              <a class="verify-link" href="https://github.com/DEGAorg/TGE-claim-contract/blob/main/audit/DegaToken-claim-contract-security-review_20_Jul_2024.pdf" aria-label="DEGA TGE claim audit report by storming0x, PDF">Audit report</a>
+              <a class="code-link" href="https://github.com/DEGAorg/TGE-claim-contract" aria-label="DEGA TGE claim source code on GitHub">source</a>
+              <a class="code-link" href="https://etherscan.io/address/0x4800f8662600c7126c44298d72d3681671212aeb" aria-label="DEGA TGE claim deployed contract on Etherscan">deployed</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <section class="section" aria-labelledby="h-services">
       <h2 id="h-services">What I do</h2>
@@ -802,89 +926,7 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="h-ledger">
-      <h2 id="h-ledger">Don't trust. <span class="accent">Verify.</span></h2>
-      <p class="section-note">
-        Contracts I architected and shipped, with the third-party reports that
-        reviewed them. Open the PDFs.
-      </p>
-      <div class="ledger">
-        <div class="ledger-head">
-          <span class="ledger-title">Verification ledger</span>
-          <span class="ledger-stamp">4 public reports</span>
-        </div>
-        <article class="entry">
-          <div class="entry-ref">
-            <span class="entry-date">2024-01-17</span>
-            <span class="auditor">STATEMIND</span>
-            <span class="auditor-note">auditors of Lido, Curve, Yearn</span>
-          </div>
-          <div>
-            <h3>DEGA ETH ISPO</h3>
-            <p class="entry-desc">
-              The first Ethereum ISPO run through Lido: users stake stETH,
-              accrue rewards, and withdraw at any time. Non-custodial by
-              design.
-            </p>
-            <p class="entry-gloss">
-              In plain terms: a staking pool where users earn rewards without
-              ever handing over custody of their funds.
-            </p>
-            <div class="entry-links">
-              <a class="verify-link" href="https://github.com/statemindio/public-audits/blob/main/Dega/2024-01-17_Dega_ISPO.pdf">Audit report</a>
-              <a class="code-link" href="https://github.com/DEGAorg/DEGA-ETH-ISPO">source</a>
-              <a class="code-link" href="https://etherscan.io/address/0x01ed03186D77698271AA316b0B29B99B1099465b">deployed</a>
-            </div>
-          </div>
-        </article>
 
-        <article class="entry">
-          <div class="entry-ref">
-            <span class="entry-date">2024</span>
-            <span class="auditor">QuillAudits + storming0x</span>
-            <span class="auditor-note">two independent reviews</span>
-          </div>
-          <div>
-            <h3>$DEGA token</h3>
-            <p class="entry-desc">
-              The ERC-20 behind the DEGA ecosystem, with its TypeScript deploy
-              pipeline. Reviewed independently by two auditors.
-            </p>
-            <div class="entry-links">
-              <a class="verify-link" href="https://github.com/DEGAorg/ERC20/blob/main/audit/DegaTokenContractAuditReport-QuillAudits.pdf">QuillAudits report</a>
-              <a class="verify-link" href="https://github.com/DEGAorg/ERC20/blob/main/audit/DegaToken_Audit_Report_By_storming0x.pdf">storming0x report</a>
-              <a class="code-link" href="https://github.com/DEGAorg/ERC20">source</a>
-              <a class="code-link" href="https://etherscan.io/token/0x97aee01ed2aabad9f54692f94461ae761d225f17">deployed</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="entry">
-          <div class="entry-ref">
-            <span class="entry-date">2024-07-20</span>
-            <span class="auditor">storming0x</span>
-            <span class="auditor-note">Yearn security researcher</span>
-          </div>
-          <div>
-            <h3>DEGA TGE claim</h3>
-            <p class="entry-desc">
-              Multi-chain token claims authorized by EIP-712 typed signatures,
-              with replay protection across chains and contracts. OpenZeppelin
-              v5, tested under Hardhat and Foundry.
-            </p>
-            <p class="entry-gloss">
-              In plain terms: users claim tokens on several chains with signed
-              permissions that cannot be copied from one chain to another.
-            </p>
-            <div class="entry-links">
-              <a class="verify-link" href="https://github.com/DEGAorg/TGE-claim-contract/blob/main/audit/DegaToken-claim-contract-security-review_20_Jul_2024.pdf">Audit report</a>
-              <a class="code-link" href="https://github.com/DEGAorg/TGE-claim-contract">source</a>
-              <a class="code-link" href="https://etherscan.io/address/0x4800f8662600c7126c44298d72d3681671212aeb">deployed</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
 
     <section class="section" aria-labelledby="h-background">
       <h2 id="h-background">Background</h2>
@@ -913,6 +955,10 @@
         <div class="timeline-row">
           <span class="timeline-years">2021 · 2023</span>
           <span class="timeline-role">Blockchain Developer <span class="org">· FIWORK · Solidity contract architecture, audit preparation, dApp integration</span></span>
+        </div>
+        <div class="timeline-row">
+          <span class="timeline-years">2019 · 2021</span>
+          <span class="timeline-role">Senior Software Engineer <span class="org">· PSL Corp, MILL5 · full-stack TypeScript and .NET for US enterprise clients</span></span>
         </div>
         <div class="timeline-row">
           <span class="timeline-years">2018 · 2019</span>
@@ -996,6 +1042,8 @@
         </a>
 
         <a href="https://chromewebstore.google.com/detail/argus/dbenlofanjfhpajaadgecbhgaaflccpg" class="project">
+          <img class="project-shot" src="assets/argus.png" width="1280" height="800" loading="lazy"
+               alt="Argus intercepting a signing request: unlimited USDC approval to an unrecognized contract, flagged CRITICAL with a plain-English explanation.">
           <div class="project-body">
             <div class="project-header">
               <h3>Argus</h3>
@@ -1036,7 +1084,19 @@
       <h2 id="h-writing">Writing</h2>
       <ul class="posts">
         <li>
-          <a href="https://dev.to/pavelespitia/solidity-vs-vyper-security-differences-every-auditor-should-know">
+          <a href="https://dev.to/pavelespitia/the-292m-kelpdao-bridge-hack-why-the-audit-wasnt-the-problem-3md9">
+            The $292M KelpDAO Bridge Hack: Why the Audit Wasn't the Problem
+          </a>
+          <div class="post-meta">dev.to · 2026</div>
+        </li>
+        <li>
+          <a href="https://dev.to/pavelespitia/signature-replay-attacks-in-solidity-the-bug-that-looks-correct-5a7c">
+            Signature Replay Attacks in Solidity: The Bug That Looks Correct
+          </a>
+          <div class="post-meta">dev.to · 2026</div>
+        </li>
+        <li>
+          <a href="https://dev.to/pavelespitia/solidity-vs-vyper-security-differences-every-auditor-should-know-2ib3">
             Solidity vs Vyper: Security Differences Every Auditor Should Know
           </a>
           <div class="post-meta">dev.to · 2026</div>
@@ -1060,8 +1120,11 @@
         write me.
       </p>
       <div class="contact-row">
-        <button class="cta-button copy-email" data-email="pavel@noctis.biz" type="button">pavel@noctis.biz ⧉</button>
-        <span class="contact-mail-note">click to copy, or <a href="mailto:pavel@noctis.biz">open your mail app</a></span>
+        <button class="cta-button copy-email" data-email="pavel@noctis.biz" type="button" aria-describedby="copy-hint">
+          <span class="copy-label">pavel@noctis.biz</span>
+          <svg class="copy-icon" width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><rect x="4.2" y="4.2" width="7.6" height="7.6" stroke="currentColor" stroke-width="1.4"/><path d="M8.8 4V1.2H1.2v7.6H4" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
+        <span class="contact-mail-note" id="copy-hint">click to copy, or <a href="mailto:pavel@noctis.biz">open your mail app</a></span>
       </div>
       <div class="links">
         <a class="link-card" href="cv/pavel-espitia-cv.pdf">CV · PDF</a>
@@ -1078,7 +1141,7 @@
       <div class="footer-meta">
         <span>Medellín, Colombia</span>
         <span>GMT-5 · Full US overlap</span>
-        <span>Links verified 2026-07-14</span>
+        <span>Links verified 2026-07-16</span>
       </div>
       <span class="status">
         <span class="status-dot"></span>
@@ -1088,19 +1151,47 @@
 
   </div>
 
+  <div id="copy-status" class="visually-hidden" role="status" aria-live="polite"></div>
+
   <script>
+    const copyStatus = document.getElementById("copy-status");
+
+    function legacyCopy(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "absolute";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch { ok = false; }
+      ta.remove();
+      return ok;
+    }
+
     document.querySelectorAll(".copy-email").forEach((btn) => {
-      const original = btn.textContent;
+      const label = btn.querySelector(".copy-label");
+      const original = label.textContent;
       btn.addEventListener("click", async () => {
         const email = btn.dataset.email;
+        let copied = false;
         try {
           await navigator.clipboard.writeText(email);
-          btn.textContent = "copied ✓";
+          copied = true;
         } catch {
+          copied = legacyCopy(email);
+        }
+        if (!copied) {
           window.location.href = "mailto:" + email;
           return;
         }
-        setTimeout(() => { btn.textContent = original; }, 1800);
+        label.textContent = "copied ✓";
+        copyStatus.textContent = "Email address copied to clipboard";
+        setTimeout(() => {
+          label.textContent = original;
+          copyStatus.textContent = "";
+        }, 1800);
       });
     });
   </script>
