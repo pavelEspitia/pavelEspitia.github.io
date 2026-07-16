@@ -122,15 +122,37 @@
     /* Header */
     .header { margin-bottom: 110px; }
 
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      margin: 0 -36px 44px;
+      padding: 18px 36px;
+      border-bottom: 1px solid var(--line-strong);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .topbar.scrolled {
+      background: rgba(10, 9, 8, 0.72);
+      -webkit-backdrop-filter: blur(14px) saturate(1.4);
+      backdrop-filter: blur(14px) saturate(1.4);
+      border-color: var(--line);
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      .topbar.scrolled {
+        background: var(--bg);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+    }
+
     .id-line {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 44px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--line-strong);
     }
 
     .name {
@@ -162,7 +184,9 @@
 
     .site-nav a:hover { color: var(--amber-bright); }
 
-    .section, footer { scroll-margin-top: 28px; }
+    .site-nav a[aria-current="true"] { color: var(--amber-bright); }
+
+    .section, .section > h2, footer { scroll-margin-top: 82px; }
 
     h1.thesis {
       font-stretch: 125%;
@@ -223,6 +247,22 @@
     }
 
     .copy-icon { flex-shrink: 0; }
+
+    .copy-label { transition: filter 0.18s ease, opacity 0.18s ease; }
+    .copy-label.swapping { filter: blur(2px); opacity: 0.6; }
+
+    /* Ledger entries reveal on first view; content stays visible without JS */
+    .reveal-ready .entry {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+      transition-delay: calc(var(--i, 0) * 70ms);
+    }
+
+    .reveal-ready .entry.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .visually-hidden {
       position: absolute;
@@ -425,16 +465,30 @@
       text-decoration: none;
       border: 1px solid var(--amber-deep);
       padding: 10px 15px;
-      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+      transition: color 0.18s ease, border-color 0.18s ease;
       white-space: nowrap;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .verify-link::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: rgba(232, 156, 30, 0.09);
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.18s var(--ease-out);
     }
 
     .verify-link::after { content: " ↗"; }
 
-    .verify-link:hover {
-      background: rgba(232,156,30,0.08);
-      color: var(--amber);
-      border-color: var(--amber);
+    @media (hover: hover) and (pointer: fine) {
+      .verify-link:hover {
+        color: var(--amber);
+        border-color: var(--amber);
+      }
+      .verify-link:hover::before { clip-path: inset(0 0 0 0); }
     }
 
     .code-link {
@@ -556,13 +610,22 @@
 
     a.project:active { transform: translateY(0) scale(0.99); }
 
+    .project-shot-frame {
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
     .project-shot {
       display: block;
       width: 100%;
       height: auto;
-      border-bottom: 1px solid var(--line);
       aspect-ratio: 1920 / 1200;
       object-fit: cover;
+      transition: transform 0.35s var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      a.project:hover .project-shot { transform: scale(1.02); }
     }
 
     .project-body { padding: 24px 26px 26px; }
@@ -741,6 +804,10 @@
     @media (prefers-reduced-motion: reduce) {
       .status-dot { animation: none; }
       html { scroll-behavior: auto; }
+      .project-shot { transition: none; }
+      .verify-link::before { transition: none; }
+      .copy-label { transition: opacity 0.18s ease; }
+      .copy-label.swapping { filter: none; }
     }
 
     /* Responsive */
@@ -765,8 +832,9 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="container">
 
-    <header class="header">
-      <div class="id-line rise">
+    <div id="top-sentinel" aria-hidden="true"></div>
+    <div class="topbar rise">
+      <div class="id-line">
         <span class="name">Pavel <span class="accent">Espitia</span></span>
         <nav class="site-nav" aria-label="Sections">
           <a href="#h-ledger">Ledger</a>
@@ -775,6 +843,10 @@
           <a href="#h-contact">Contact</a>
         </nav>
       </div>
+    </div>
+
+    <header class="header">
+
       <h1 class="thesis rise d1">
         I build smart contracts that
         <span class="accent">survive the audit</span>
@@ -1003,8 +1075,10 @@
       </p>
       <div class="projects">
         <a href="https://lens.noctis.biz" class="project">
-          <img class="project-shot" src="assets/argus-lens.png" width="1920" height="1200" loading="lazy"
-               alt="Argus Lens: paste a GitHub repo URL and get a static malware verdict. Nothing is cloned, installed, or run.">
+          <div class="project-shot-frame">
+            <img class="project-shot" src="assets/argus-lens.png" width="1920" height="1200" loading="lazy"
+                 alt="Argus Lens: paste a GitHub repo URL and get a static malware verdict. Nothing is cloned, installed, or run.">
+          </div>
           <div class="project-body">
             <div class="project-header">
               <h3>Argus Lens</h3>
@@ -1023,8 +1097,10 @@
         </a>
 
         <a href="https://scry.noctis.biz" class="project">
-          <img class="project-shot" src="assets/scry.png" width="1920" height="1200" loading="lazy"
-               alt="Scry: paste a contract address, pick a chain, and ask questions in plain English.">
+          <div class="project-shot-frame">
+            <img class="project-shot" src="assets/scry.png" width="1920" height="1200" loading="lazy"
+                 alt="Scry: paste a contract address, pick a chain, and ask questions in plain English.">
+          </div>
           <div class="project-body">
             <div class="project-header">
               <h3>Scry</h3>
@@ -1042,8 +1118,10 @@
         </a>
 
         <a href="https://chromewebstore.google.com/detail/argus/dbenlofanjfhpajaadgecbhgaaflccpg" class="project">
-          <img class="project-shot" src="assets/argus.png" width="1280" height="800" loading="lazy"
-               alt="Argus intercepting a signing request: unlimited USDC approval to an unrecognized contract, flagged CRITICAL with a plain-English explanation.">
+          <div class="project-shot-frame">
+            <img class="project-shot" src="assets/argus.png" width="1280" height="800" loading="lazy"
+                 alt="Argus intercepting a signing request: unlimited USDC approval to an unrecognized contract, flagged CRITICAL with a plain-English explanation.">
+          </div>
           <div class="project-body">
             <div class="project-header">
               <h3>Argus</h3>
@@ -1186,14 +1264,69 @@
           window.location.href = "mailto:" + email;
           return;
         }
-        label.textContent = "copied ✓";
+        label.classList.add("swapping");
+        setTimeout(() => {
+          label.textContent = "copied ✓";
+          label.classList.remove("swapping");
+        }, 180);
         copyStatus.textContent = "Email address copied to clipboard";
         setTimeout(() => {
-          label.textContent = original;
+          label.classList.add("swapping");
+          setTimeout(() => {
+            label.textContent = original;
+            label.classList.remove("swapping");
+          }, 180);
           copyStatus.textContent = "";
         }, 1800);
       });
     });
+
+    // Glass topbar materializes once the page scrolls (sentinel, no scroll listener)
+    const topbar = document.querySelector(".topbar");
+    const sentinel = document.getElementById("top-sentinel");
+    if (topbar && sentinel && "IntersectionObserver" in window) {
+      new IntersectionObserver(([e]) => {
+        topbar.classList.toggle("scrolled", !e.isIntersecting);
+      }).observe(sentinel);
+    }
+
+    // Scrollspy: highlight the nav link of the section in view
+    const navLinks = [...document.querySelectorAll(".site-nav a")];
+    if (navLinks.length && "IntersectionObserver" in window) {
+      const byId = new Map(navLinks.map((a) => [a.hash.slice(1), a]));
+      const spy = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            navLinks.forEach((a) => a.removeAttribute("aria-current"));
+            const link = byId.get(e.target.querySelector("h2")?.id);
+            if (link) link.setAttribute("aria-current", "true");
+          }
+        },
+        { rootMargin: "-20% 0px -60% 0px" }
+      );
+      document.querySelectorAll(".section").forEach((s) => spy.observe(s));
+    }
+
+    // Ledger entries reveal once on first view; without JS they are simply visible
+    const ledger = document.querySelector(".ledger");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (ledger && !reduceMotion && "IntersectionObserver" in window) {
+      const entries = [...ledger.querySelectorAll(".entry")];
+      entries.forEach((el, i) => el.style.setProperty("--i", i));
+      ledger.classList.add("reveal-ready");
+      const revealer = new IntersectionObserver(
+        (obs, io) => {
+          for (const e of obs) {
+            if (!e.isIntersecting) continue;
+            entries.forEach((el) => el.classList.add("in"));
+            io.disconnect();
+          }
+        },
+        { threshold: 0.15 }
+      );
+      revealer.observe(ledger);
+    }
   </script>
 </body>
 </html>
