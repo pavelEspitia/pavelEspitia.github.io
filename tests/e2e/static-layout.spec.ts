@@ -4,6 +4,7 @@ const viewports = [
   { name: 'desktop', width: 1440, height: 1000 },
   { name: 'tablet', width: 900, height: 1000 },
   { name: 'mobile', width: 390, height: 844 },
+  { name: 'narrow mobile', width: 320, height: 720 },
 ];
 
 for (const viewport of viewports) {
@@ -18,7 +19,8 @@ for (const viewport of viewports) {
     if (viewport.width <= 900) {
       const menu = page.getByRole('button', { name: 'Open navigation' });
       await expect(menu).toBeVisible();
-      await menu.click();
+      await menu.focus();
+      await page.keyboard.press('Enter');
     }
     await expect(page.locator('.primary-nav')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Explore the product universe' })).toBeVisible();
@@ -33,6 +35,13 @@ for (const viewport of viewports) {
       document.documentElement.scrollWidth > document.documentElement.clientWidth
     ));
     expect(hasHorizontalOverflow).toBe(false);
+    const headerControlsFit = await page.locator('.site-header a, .site-header button').evaluateAll((controls) => controls
+      .filter((control) => getComputedStyle(control).display !== 'none')
+      .every((control) => {
+        const bounds = control.getBoundingClientRect();
+        return bounds.left >= 0 && bounds.right <= document.documentElement.clientWidth;
+      }));
+    expect(headerControlsFit).toBe(true);
   });
 }
 

@@ -34,9 +34,17 @@ describe('createMotionController', () => {
     controller.pauseAll();
     controller.resumeEligible();
     expect(eligible.pause).toHaveBeenCalledOnce();
-    expect(blocked.pause).toHaveBeenCalledOnce();
+    expect(blocked.pause).toHaveBeenCalledTimes(2);
     expect(eligible.start).toHaveBeenCalledOnce();
     expect(blocked.start).not.toHaveBeenCalled();
+  });
+
+  it('immediately pauses an effect registered after motion was reduced', () => {
+    const controller = createMotionController(storage('reduced'), { reduced: false });
+    const effect = { start: vi.fn(), pause: vi.fn(), destroy: vi.fn() };
+    controller.register(effect);
+    expect(effect.pause).toHaveBeenCalledOnce();
+    expect(effect.start).not.toHaveBeenCalled();
   });
 
   it('pauses registered effects when the document becomes hidden', () => {

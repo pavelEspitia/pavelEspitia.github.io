@@ -25,6 +25,19 @@ test('story and evidence modes preserve the active product context', async ({ pa
   await expect(page).toHaveURL(/#product-argus$/);
 });
 
+test('browser history and product state stay synchronized', async ({ page }) => {
+  await page.goto('/#products');
+  await page.locator('[data-constellation] a[href="#product-argus"]').click();
+  await expect(page.locator('#product-argus')).toHaveAttribute('data-active', '');
+  await page.goBack();
+  await expect(page.locator('#product-argus')).not.toHaveAttribute('data-active', '');
+  await expect(page.locator('html')).not.toHaveAttribute('data-active-product', /.+/);
+  await page.goForward();
+  await expect(page.locator('#product-argus')).toHaveAttribute('data-active', '');
+  await page.evaluate(() => { location.hash = '#product-not-real'; });
+  await expect(page.locator('#product-argus')).not.toHaveAttribute('data-active', '');
+});
+
 test('product stories remain readable without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();

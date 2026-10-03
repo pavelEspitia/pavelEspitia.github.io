@@ -30,6 +30,7 @@ export function bootstrapPortfolio(document: Document, window: Window) {
     root.dataset.motion = current;
     if (motionButton) {
       motionButton.textContent = current === 'full' ? 'Reduce motion' : 'Enable motion';
+      motionButton.setAttribute('aria-label', current === 'full' ? 'Reduce motion' : 'Enable motion');
       motionButton.setAttribute('aria-pressed', String(current === 'reduced'));
     }
   };

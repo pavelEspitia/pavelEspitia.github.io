@@ -23,6 +23,14 @@
   .header-tools { justify-self: end; }
   .header-contact { display: none; }
 }
+@media (max-width: 420px) {
+  .site-header { grid-template-columns: auto auto 1fr; gap: 0.35rem; }
+  .wordmark__full { display: none; }
+  .header-tools { gap: 0.25rem; }
+  .header-tools .header-control { width: 2.5rem; padding-inline: 0.4rem; font-size: 0; }
+  [data-motion-toggle]::before { content: '◐'; font-size: 0.9rem; }
+  [data-command-trigger] kbd { display: block; font-size: 0.65rem; }
+}
 .button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; padding: 0.7rem 1.1rem; border: 1px solid var(--color-line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; text-decoration: none; text-transform: uppercase; cursor: pointer; }
 .button--primary { border-color: var(--color-signal-cyan); background: var(--color-signal-cyan); color: var(--color-void); box-shadow: 0 0 2.5rem rgb(87 230 255 / 0.14); }
 .button--quiet { background: rgb(244 247 245 / 0.04); }

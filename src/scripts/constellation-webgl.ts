@@ -59,12 +59,14 @@ export default async function createWebGLConstellation(options: WebGLConstellati
   });
   let frame = 0;
   let paused = false;
+  let destroyed = false;
   const stability = createFrameStabilityMonitor(options.onUnstable, { warmupMs: 2_000, windowMs: 2_000, minimumFps: 45, failedWindows: 3 });
   const render = (time: number) => {
-    if (paused) return;
+    if (paused || destroyed) return;
     group.rotation.z += 0.0008;
     renderer.render(scene, camera);
     stability.frame(time);
+    if (destroyed) return;
     frame = requestAnimationFrame(render);
   };
   const resize = () => {
@@ -84,6 +86,8 @@ export default async function createWebGLConstellation(options: WebGLConstellati
     pause() { paused = true; cancelAnimationFrame(frame); },
     resume() { if (!paused) return; paused = false; frame = requestAnimationFrame(render); },
     destroy() {
+      destroyed = true;
+      paused = true;
       cancelAnimationFrame(frame);
       observer.disconnect();
       geometry.dispose();

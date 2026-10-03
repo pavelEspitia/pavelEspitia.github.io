@@ -60,6 +60,7 @@ export function createMotionController(storage: StorageLike, media: MotionMedia)
     },
     register(effect) {
       effects.add(effect);
+      if (preference === 'reduced' || media.isDocumentHidden?.() || effect.eligible?.() === false) effect.pause();
       return () => {
         effect.destroy();
         effects.delete(effect);
