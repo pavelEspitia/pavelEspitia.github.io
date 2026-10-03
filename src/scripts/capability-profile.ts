@@ -21,3 +21,9 @@ export function selectCapabilityProfile(input: CapabilityInput): CapabilityProfi
 
   return canUseImmersiveRenderer ? 'tier-a' : 'tier-b';
 }
+
+export function downgradeCapability(current: CapabilityProfile, _reason: string): CapabilityProfile {
+  if (current === 'tier-a') return 'tier-b';
+  if (current === 'tier-b') return 'tier-c';
+  return 'tier-c';
+}

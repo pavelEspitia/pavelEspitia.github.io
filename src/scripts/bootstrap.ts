@@ -15,7 +15,7 @@ export function bootstrapPortfolio(document: Document, window: Window) {
   const canvas = document.createElement('canvas');
   const webgl = Boolean(canvas.getContext('webgl2') || canvas.getContext('webgl'));
   const memory = (window.navigator as Navigator & { deviceMemory?: number }).deviceMemory;
-  const tier = selectCapabilityProfile({ reducedMotion: reducedQuery.matches, webgl, precisePointer: preciseQuery.matches, viewportWidth: window.innerWidth, deviceMemoryGB: memory });
+  let tier = selectCapabilityProfile({ reducedMotion: reducedQuery.matches, webgl, precisePointer: preciseQuery.matches, viewportWidth: window.innerWidth, deviceMemoryGB: memory });
   root.dataset.capabilityTier = tier;
 
   const motion = createMotionController(window.localStorage, {
@@ -48,14 +48,41 @@ export function bootstrapPortfolio(document: Document, window: Window) {
   const productWorlds = createProductWorlds(document, motion);
   let constellation: ReturnType<typeof createLiteConstellation> | null = null;
   let unregisterConstellation: (() => void) | null = null;
-  if (tier === 'tier-b' && motion.getPreference() === 'full') {
+  let destroyed = false;
+  let downgraded = false;
+  const productIds = [...document.querySelectorAll<HTMLElement>('[data-constellation] [data-product]')].map((node) => node.dataset.product ?? '').filter(Boolean);
+  const registerConstellation = (controller: ReturnType<typeof createLiteConstellation>) => {
+    if (destroyed) { controller.destroy(); return; }
+    constellation = controller;
+    unregisterConstellation = motion.register({ start: controller.resume, pause: controller.pause, destroy: controller.destroy });
+  };
+  const activateLite = () => {
+    if (destroyed || constellation) return;
     try {
-      const productIds = [...document.querySelectorAll<HTMLElement>('[data-constellation] [data-product]')].map((node) => node.dataset.product ?? '').filter(Boolean);
-      constellation = createLiteConstellation(document, productIds, motion);
-      unregisterConstellation = motion.register({ start: constellation.resume, pause: constellation.pause, destroy: constellation.destroy });
+      tier = 'tier-b';
+      root.dataset.capabilityTier = tier;
+      registerConstellation(createLiteConstellation(document, productIds, motion));
     } catch { /* Tier C semantics remain intact. */ }
+  };
+  if (motion.getPreference() === 'full' && tier === 'tier-b') activateLite();
+  if (motion.getPreference() === 'full' && tier === 'tier-a') {
+    import('./constellation-webgl')
+      .then(({ default: createWebGLConstellation }) => createWebGLConstellation({
+        root: document,
+        productIds,
+        onUnstable() {
+          if (downgraded) return;
+          downgraded = true;
+          unregisterConstellation?.();
+          unregisterConstellation = null;
+          constellation = null;
+          activateLite();
+        },
+      }))
+      .then(registerConstellation)
+      .catch(() => { if (!downgraded) { downgraded = true; activateLite(); } });
   }
-  return () => { motionButton?.removeEventListener('click', toggleMotion); navigation.destroy(); palette.destroy(); contact.destroy(); evidenceMode.destroy(); productWorlds.destroy(); unregisterConstellation?.(); if (!unregisterConstellation) constellation?.destroy(); motion.destroy(); };
+  return () => { destroyed = true; motionButton?.removeEventListener('click', toggleMotion); navigation.destroy(); palette.destroy(); contact.destroy(); evidenceMode.destroy(); productWorlds.destroy(); unregisterConstellation?.(); if (!unregisterConstellation) constellation?.destroy(); motion.destroy(); };
 }
 
 if (typeof document !== 'undefined' && typeof window !== 'undefined') bootstrapPortfolio(document, window);
