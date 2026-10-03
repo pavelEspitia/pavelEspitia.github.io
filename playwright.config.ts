@@ -12,7 +12,7 @@ export default defineConfig({
       : undefined,
   },
   webServer: {
-    command: './node_modules/.bin/vite --host 127.0.0.1 --port 4173',
+    command: 'npm run build && ./node_modules/.bin/vite preview --host 127.0.0.1 --port 4173',
     port: 4173,
     reuseExistingServer: false,
   },
