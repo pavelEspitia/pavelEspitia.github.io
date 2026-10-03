@@ -6,6 +6,7 @@
 .aurora { animation: aurora-drift 16s ease-in-out infinite alternate; }
 .constellation-node a, .button, .proof-links a, .product-links a, .contact-links a { transition: transform 280ms var(--ease-out), border-color 180ms ease, background-color 180ms ease, box-shadow 280ms ease; }
 .constellation-node a:hover, .constellation-node a:focus-visible { transform: translateY(-0.3rem) scale(1.025); border-color: var(--color-signal-cyan); box-shadow: 0 1rem 4rem rgb(87 230 255 / 0.13); }
+.constellation-shell[data-focus-product] canvas { filter: drop-shadow(0 0 0.8rem rgb(87 230 255 / 0.28)); }
 .button:hover, .proof-links a:hover, .product-links a:hover, .contact-links a:hover { transform: translateY(-0.18rem); border-color: var(--color-signal-cyan); }
 html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-motion="reduced"] *::after { scroll-behavior: auto !important; animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 @media (prefers-reduced-motion: reduce) {

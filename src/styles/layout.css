@@ -10,6 +10,7 @@
 .arrival__intro { color: var(--color-muted); font-size: clamp(1.08rem, 1rem + 0.55vw, 1.45rem); }
 .arrival__actions, .contact-actions { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-3); }
 .constellation-shell { position: relative; min-height: 34rem; margin-top: var(--space-5); padding: var(--space-3); border: 1px solid var(--color-line); border-radius: var(--radius-lg); background: linear-gradient(145deg, rgb(12 19 33 / 0.8), rgb(5 7 13 / 0.4)); overflow: hidden; isolation: isolate; }
+.constellation-shell canvas { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .constellation-shell::before { position: absolute; inset: 12% 15%; z-index: -1; border: 1px solid rgb(87 230 255 / 0.11); border-radius: 50%; box-shadow: 0 0 8rem rgb(87 230 255 / 0.07); content: ""; }
 .constellation-heading { max-width: 33rem; }
 .constellation-heading h2 { font-family: var(--font-sans); font-size: clamp(1.4rem, 2.4vw, 2.3rem); line-height: 1.08; letter-spacing: -0.04em; }

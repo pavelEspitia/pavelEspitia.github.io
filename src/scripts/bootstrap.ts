@@ -1,5 +1,6 @@
 import { selectCapabilityProfile } from './capability-profile';
 import { createCommandPalette, type Destination } from './command-palette';
+import { createLiteConstellation } from './constellation-lite';
 import { enhanceContact } from './contact';
 import { createEvidenceMode } from './evidence-mode';
 import { createMotionController } from './motion-controller';
@@ -45,7 +46,16 @@ export function bootstrapPortfolio(document: Document, window: Window) {
   const contact = enhanceContact(document, window.navigator);
   const evidenceMode = createEvidenceMode(document, window.localStorage);
   const productWorlds = createProductWorlds(document, motion);
-  return () => { motionButton?.removeEventListener('click', toggleMotion); navigation.destroy(); palette.destroy(); contact.destroy(); evidenceMode.destroy(); productWorlds.destroy(); motion.destroy(); };
+  let constellation: ReturnType<typeof createLiteConstellation> | null = null;
+  let unregisterConstellation: (() => void) | null = null;
+  if (tier === 'tier-b' && motion.getPreference() === 'full') {
+    try {
+      const productIds = [...document.querySelectorAll<HTMLElement>('[data-constellation] [data-product]')].map((node) => node.dataset.product ?? '').filter(Boolean);
+      constellation = createLiteConstellation(document, productIds, motion);
+      unregisterConstellation = motion.register({ start: constellation.resume, pause: constellation.pause, destroy: constellation.destroy });
+    } catch { /* Tier C semantics remain intact. */ }
+  }
+  return () => { motionButton?.removeEventListener('click', toggleMotion); navigation.destroy(); palette.destroy(); contact.destroy(); evidenceMode.destroy(); productWorlds.destroy(); unregisterConstellation?.(); if (!unregisterConstellation) constellation?.destroy(); motion.destroy(); };
 }
 
 if (typeof document !== 'undefined' && typeof window !== 'undefined') bootstrapPortfolio(document, window);
