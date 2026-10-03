@@ -1,8 +1,10 @@
 import { selectCapabilityProfile } from './capability-profile';
 import { createCommandPalette, type Destination } from './command-palette';
 import { enhanceContact } from './contact';
+import { createEvidenceMode } from './evidence-mode';
 import { createMotionController } from './motion-controller';
 import { createNavigationController } from './navigation';
+import { createProductWorlds } from './product-worlds';
 
 export function bootstrapPortfolio(document: Document, window: Window) {
   const root = document.documentElement;
@@ -41,7 +43,9 @@ export function bootstrapPortfolio(document: Document, window: Window) {
   const navigation = createNavigationController(document);
   const palette = createCommandPalette(document, destinations);
   const contact = enhanceContact(document, window.navigator);
-  return () => { motionButton?.removeEventListener('click', toggleMotion); navigation.destroy(); palette.destroy(); contact.destroy(); motion.destroy(); };
+  const evidenceMode = createEvidenceMode(document, window.localStorage);
+  const productWorlds = createProductWorlds(document, motion);
+  return () => { motionButton?.removeEventListener('click', toggleMotion); navigation.destroy(); palette.destroy(); contact.destroy(); evidenceMode.destroy(); productWorlds.destroy(); motion.destroy(); };
 }
 
 if (typeof document !== 'undefined' && typeof window !== 'undefined') bootstrapPortfolio(document, window);

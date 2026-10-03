@@ -21,8 +21,10 @@ export function renderProduct(product: Product): string {
       </dl>`
     : '';
 
+  const hasEvidence = Boolean(evidence || product.links.length);
   return `
-    <article class="product-world" id="product-${escapeHtml(product.id)}" data-product="${escapeHtml(product.id)}" style="--product-primary:${escapeHtml(product.visual.primary)};--product-secondary:${escapeHtml(product.visual.secondary)};--product-glow:${escapeHtml(product.visual.glow)}">
+    <article class="product-world" id="product-${escapeHtml(product.id)}" tabindex="-1" data-product="${escapeHtml(product.id)}" data-has-evidence="${hasEvidence}" style="--product-primary:${escapeHtml(product.visual.primary)};--product-secondary:${escapeHtml(product.visual.secondary)};--product-glow:${escapeHtml(product.visual.glow)}">
+      <button class="product-world__close" type="button" data-product-close aria-label="Close ${escapeHtml(product.name)} product world">Back to constellation</button>
       <header class="product-world__header"><p class="eyebrow">${escapeHtml(product.eyebrow)}</p><h3>${escapeHtml(product.name)}</h3><p class="product-world__summary">${escapeHtml(product.summary)}</p><div class="product-tags"><span>${escapeHtml(product.status)}</span>${product.domains.map((domain) => `<span>${escapeHtml(domain)}</span>`).join('')}</div></header>
       ${media}
       <div class="product-world__story" data-mode-content="story">
@@ -30,6 +32,6 @@ export function renderProduct(product: Product): string {
         <div><span class="detail-label">The response</span><p>${escapeHtml(product.response)}</p></div>
         <div><span class="detail-label">The difference</span><p>${escapeHtml(product.differentiator)}</p></div>
       </div>
-      <div class="product-world__evidence" data-mode-content="evidence">${evidence}${product.links.length ? `<div class="product-links">${product.links.map((link) => renderLink(link)).join('')}</div>` : ''}</div>
+      ${hasEvidence ? `<div class="product-world__evidence" data-mode-content="evidence">${evidence}${product.links.length ? `<div class="product-links">${product.links.map((link) => renderLink(link)).join('')}</div>` : ''}</div>` : ''}
     </article>`;
 }

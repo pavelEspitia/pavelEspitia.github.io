@@ -33,6 +33,9 @@
 .constellation-node__name { font-weight: 800; }
 .constellation-node__domain { color: var(--color-muted); font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; }
 .product-world__header h3 { margin-block: 0.25rem 0.75rem; color: var(--product-primary); font-family: var(--font-display); font-size: clamp(3rem, 5vw, 6rem); font-weight: 500; letter-spacing: -0.055em; }
+.product-world__close { position: absolute; top: 1rem; right: 1rem; z-index: 2; display: none; min-height: 2.5rem; padding: 0.5rem 0.8rem; border: 1px solid rgb(var(--product-glow) / 0.35); border-radius: 999px; background: var(--color-void); color: var(--product-primary); font-family: var(--font-mono); font-size: 0.68rem; cursor: pointer; }
+.product-world[data-active] { border-color: rgb(var(--product-glow) / 0.72); box-shadow: 0 1.5rem 7rem rgb(var(--product-glow) / 0.13); }
+.product-world[data-active] .product-world__close { display: inline-flex; align-items: center; }
 .product-world__summary { color: var(--color-muted); font-size: 1.15rem; }
 .product-tags, .proof-links, .product-links, .contact-links { display: flex; flex-wrap: wrap; gap: 0.55rem; }
 .product-tags span { padding: 0.35rem 0.65rem; border: 1px solid rgb(var(--product-glow) / 0.3); border-radius: 999px; color: var(--product-primary); font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; }
@@ -48,6 +51,7 @@
 .mode-switch { display: inline-flex; gap: 0.25rem; margin-bottom: var(--space-3); padding: 0.25rem; border: 1px solid var(--color-line); border-radius: 999px; background: var(--color-deep-space); }
 .mode-switch button { min-height: 2.75rem; padding: 0.55rem 1rem; border: 0; border-radius: 999px; background: transparent; cursor: pointer; }
 .mode-switch button[aria-pressed="true"] { background: var(--color-soft-white); color: var(--color-void); }
+.js [data-mode-content][hidden] { display: none; }
 .capability-card ul { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .capability-card li { color: var(--color-signal-cyan); font-family: var(--font-mono); font-size: 0.68rem; }
 .writing-index, .writing-meta, .experience-list span, .experience-list small { color: var(--color-muted); font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; }
