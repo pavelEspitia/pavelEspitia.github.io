@@ -10,13 +10,16 @@
     "test": "pnpm test:unit",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
-    "verify:build": "node scripts/verify-build.mjs dist"
+    "test:lighthouse": "node scripts/run-lighthouse.mjs",
+    "verify:build": "node scripts/verify-build.mjs dist",
+    "verify": "pnpm test:unit && pnpm build && pnpm verify:build && pnpm test:e2e && pnpm test:lighthouse"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.19.0",
   "devDependencies": {
+    "@lhci/cli": "0.15.1",
     "@playwright/test": "1.59.1",
     "@types/three": "^0.186.0",
     "jsdom": "^30.1.1",

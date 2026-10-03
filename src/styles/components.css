@@ -16,10 +16,12 @@
 .command-results a { display: block; padding: 0.8rem 1rem; border-radius: 0.75rem; color: var(--color-soft-white); text-decoration: none; }
 .command-results a:hover, .command-results a:focus { background: rgb(87 230 255 / 0.1); }
 @media (max-width: 900px) {
+  .site-header { grid-template-columns: auto auto 1fr; }
   .menu-toggle { display: inline-flex; }
   .primary-nav { display: none; position: absolute; top: calc(100% + 0.5rem); left: 1rem; right: 1rem; flex-direction: column; padding: 1rem; border: 1px solid var(--color-line); border-radius: 1rem; background: var(--color-deep-space); }
   .primary-nav[data-open] { display: flex; }
-  .header-tools .header-control:first-child, .header-contact { display: none; }
+  .header-tools { justify-self: end; }
+  .header-contact { display: none; }
 }
 .button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; padding: 0.7rem 1.1rem; border: 1px solid var(--color-line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; text-decoration: none; text-transform: uppercase; cursor: pointer; }
 .button--primary { border-color: var(--color-signal-cyan); background: var(--color-signal-cyan); color: var(--color-void); box-shadow: 0 0 2.5rem rgb(87 230 255 / 0.14); }

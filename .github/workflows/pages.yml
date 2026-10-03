@@ -27,8 +27,9 @@ jobs:
       - run: pnpm test
       - run: pnpm build
       - run: pnpm verify:build
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm test:e2e -- tests/e2e/routes.spec.ts
+      - run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - run: pnpm test:e2e
+      - run: pnpm test:lighthouse
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
       - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b
         with:

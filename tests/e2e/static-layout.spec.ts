@@ -15,6 +15,11 @@ for (const viewport of viewports) {
     await page.keyboard.press('Tab');
     await expect(page.locator('.skip-link')).toBeFocused();
     await expect(page.locator('.skip-link')).toBeVisible();
+    if (viewport.width <= 900) {
+      const menu = page.getByRole('button', { name: 'Open navigation' });
+      await expect(menu).toBeVisible();
+      await menu.click();
+    }
     await expect(page.locator('.primary-nav')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Explore the product universe' })).toBeVisible();
 
