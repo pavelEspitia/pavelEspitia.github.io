@@ -1,0 +1,10 @@
+.skip-link { position: fixed; top: 0.75rem; left: 0.75rem; z-index: 100; padding: 0.7rem 1rem; border-radius: 999px; background: var(--color-soft-white); color: var(--color-void); font-weight: 800; transform: translateY(-180%); }
+.skip-link:focus { transform: translateY(0); }
+:focus-visible { outline: 3px solid var(--color-signal-cyan); outline-offset: 4px; }
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
+[data-mode-content="evidence"] { display: block; }
+@media (forced-colors: active) {
+  .site-atmosphere { display: none; }
+  .button, .constellation-node a, .product-world, .proof-ledger, .capability-matrix { border: 1px solid CanvasText; }
+  .shipping-status i { forced-color-adjust: none; background: Highlight; }
+}

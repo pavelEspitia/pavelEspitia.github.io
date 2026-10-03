@@ -1,0 +1,30 @@
+:root {
+  color-scheme: dark;
+  --color-void: #05070d;
+  --color-deep-space: #090d18;
+  --color-soft-white: #f4f7f5;
+  --color-signal-cyan: #57e6ff;
+  --color-neural-violet: #9173ff;
+  --color-security-amber: #ffbe55;
+  --color-verification-green: #5bf0a5;
+  --color-critical-coral: #ff6577;
+  --color-muted: #9aa5b7;
+  --color-line: rgb(244 247 245 / 0.12);
+  --color-surface: rgb(14 20 34 / 0.72);
+  --font-display: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+  --font-sans: Inter, "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --space-1: clamp(0.5rem, 0.4rem + 0.3vw, 0.75rem);
+  --space-2: clamp(0.875rem, 0.7rem + 0.5vw, 1.25rem);
+  --space-3: clamp(1.25rem, 1rem + 0.8vw, 2rem);
+  --space-4: clamp(2rem, 1.4rem + 2vw, 4rem);
+  --space-5: clamp(3.5rem, 2rem + 5vw, 8rem);
+  --space-6: clamp(5rem, 3rem + 8vw, 12rem);
+  --page-gutter: clamp(1rem, 4vw, 4.5rem);
+  --content-max: 90rem;
+  --text-max: 48rem;
+  --radius-sm: 0.65rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 2rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
