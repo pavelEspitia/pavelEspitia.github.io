@@ -9,10 +9,12 @@ export function renderHomePage(content: SiteContent): string {
   <div class="site-atmosphere" aria-hidden="true"><div class="aurora"></div><div class="grain"></div></div>
   <header class="site-header" data-site-header>
     <a class="wordmark" href="#universe" aria-label="${escapeHtml(content.person.name)} — home"><span>P</span><span class="wordmark__full">${escapeHtml(content.person.name)}</span></a>
-    <nav class="primary-nav" aria-label="Primary navigation">${content.navigation.map(({ label, target }) => `<a href="#${escapeHtml(target)}">${escapeHtml(label)}</a>`).join('')}</nav>
+    <button class="header-control menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle>Menu</button>
+    <nav class="primary-nav" aria-label="Primary navigation" data-primary-nav>${content.navigation.map(({ label, target }) => `<a href="#${escapeHtml(target)}">${escapeHtml(label)}</a>`).join('')}</nav>
+    <div class="header-tools"><button class="header-control" type="button" data-motion-toggle aria-pressed="false">Reduce motion</button><button class="header-control" type="button" data-command-trigger aria-label="Open command palette">Command <kbd>⌘K</kbd></button></div>
     <a class="header-contact" href="#contact">Start a conversation</a>
   </header>
-  <main id="main">
+  <main id="main" tabindex="-1">
     <section class="arrival" id="universe" aria-labelledby="universe-title">
       <div class="arrival__signal" aria-hidden="true"><span></span><span></span><span></span></div>
       <p class="eyebrow">Independent product engineer · Medellín</p><h1 id="universe-title">${escapeHtml(content.person.positioning)}</h1><p class="arrival__intro">${escapeHtml(content.person.introduction)}</p>
@@ -32,5 +34,7 @@ export function renderHomePage(content: SiteContent): string {
     <section class="section section--about" id="about" aria-labelledby="about-title"><div class="section-heading"><p class="eyebrow">About</p><h2 id="about-title">Engineering judgment built across expensive failure modes.</h2></div><div class="about-copy">${content.about.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')}</div><ol class="experience-list">${content.about.experience.map((entry) => `<li><span>${escapeHtml(entry.years)}</span><strong>${escapeHtml(entry.role)}</strong><small>${escapeHtml(entry.organization)}</small></li>`).join('')}</ol><div class="about-signals"><div><h3>Selected clients</h3><p>${content.about.clients.map(escapeHtml).join(' · ')}</p></div><div><h3>Networks</h3><p>${content.about.networks.map(escapeHtml).join(' · ')}</p></div></div></section>
     <section class="section section--contact" id="contact" aria-labelledby="contact-title"><p class="eyebrow">Open channel</p><h2 id="contact-title">Building something difficult? Good.</h2><p>${escapeHtml(content.contact.pitch)}</p><div class="contact-actions"><button class="button button--primary" type="button" data-copy-email="${escapeHtml(content.contact.email)}">Copy ${escapeHtml(content.contact.email)}</button><a class="button button--quiet" href="mailto:${escapeHtml(content.contact.email)}">Open your mail app</a></div><nav class="contact-links" aria-label="Profile and CV links">${content.contact.links.map((link) => renderLink(link)).join('')}</nav></section>
   </main>
-  <footer class="site-footer"><span>${escapeHtml(content.person.location)}</span><span>${escapeHtml(content.person.timezone)}</span><span>Links verified ${escapeHtml(content.linkVerifiedOn)}</span><span class="shipping-status"><i aria-hidden="true"></i>Shipping</span></footer><div class="visually-hidden" role="status" aria-live="polite" data-live-status></div>`;
+  <footer class="site-footer"><span>${escapeHtml(content.person.location)}</span><span>${escapeHtml(content.person.timezone)}</span><span>Links verified ${escapeHtml(content.linkVerifiedOn)}</span><span class="shipping-status"><i aria-hidden="true"></i>Shipping</span></footer>
+  <dialog class="command-dialog" aria-labelledby="command-title" data-command-dialog><form method="dialog"><button class="command-close" aria-label="Close command palette">Close</button></form><p class="eyebrow">Quick navigation</p><h2 id="command-title">Navigate the portfolio</h2><label for="command-search">Search</label><input id="command-search" type="search" placeholder="Search products and sections" autocomplete="off"><div class="command-results" role="listbox" data-command-results></div></dialog>
+  <div class="visually-hidden" role="status" aria-live="polite" data-live-status></div>`;
 }
