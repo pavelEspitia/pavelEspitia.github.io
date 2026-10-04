@@ -38,6 +38,26 @@
 .arrival__signal span { width: 2.5rem; height: 0.2rem; border-radius: 1rem; background: var(--color-signal-cyan); box-shadow: 0 0 1rem var(--color-signal-cyan); }
 .arrival__signal span:nth-child(2) { width: 1rem; background: var(--color-neural-violet); }
 .arrival__signal span:nth-child(3) { width: 0.35rem; background: var(--color-critical-coral); }
+.arrival__reactor { --reactor-size: clamp(25rem, 47vw, 45rem); position: absolute; z-index: 0; top: clamp(1rem, 5vh, 5rem); right: clamp(-13rem, -5vw, -2rem); width: var(--reactor-size); aspect-ratio: 1; border-radius: 50%; opacity: 0.92; filter: drop-shadow(0 0 4rem rgb(87 230 255 / 0.16)); pointer-events: none; }
+.arrival__reactor::before, .arrival__reactor::after { position: absolute; inset: 17%; border-radius: 50%; content: ""; }
+.arrival__reactor::before { border: 1px solid rgb(87 230 255 / 0.28); box-shadow: inset 0 0 4rem rgb(87 230 255 / 0.08), 0 0 5rem rgb(145 115 255 / 0.12); }
+.arrival__reactor::after { inset: 38%; background: radial-gradient(circle, rgb(244 247 245 / 0.95) 0 2%, rgb(87 230 255 / 0.82) 3% 7%, rgb(87 230 255 / 0.08) 28%, transparent 65%); box-shadow: 0 0 3rem rgb(87 230 255 / 0.42); }
+.hero-reactor__scan { position: absolute; inset: 5%; border-radius: 50%; background: conic-gradient(from 25deg, transparent 0 70%, rgb(87 230 255 / 0.34) 82%, transparent 89%), repeating-conic-gradient(from 0deg, rgb(244 247 245 / 0.09) 0 1deg, transparent 1deg 12deg); mask: radial-gradient(circle, transparent 0 31%, #000 32% 33%, transparent 34% 60%, #000 61% 62%, transparent 63%); }
+.hero-reactor__ring { position: absolute; border: 1px solid rgb(244 247 245 / 0.16); border-radius: 50%; }
+.hero-reactor__ring::before, .hero-reactor__ring::after { position: absolute; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--color-signal-cyan); box-shadow: 0 0 1.6rem currentColor; content: ""; }
+.hero-reactor__ring::before { top: 8%; left: 24%; color: var(--color-signal-cyan); }
+.hero-reactor__ring::after { right: 12%; bottom: 17%; color: var(--color-neural-violet); background: currentColor; }
+.hero-reactor__ring--outer { inset: 9%; border-style: dashed; }
+.hero-reactor__ring--inner { inset: 27%; border-color: rgb(145 115 255 / 0.34); }
+.hero-reactor__core { display: grid; position: absolute; inset: 41%; place-items: center; border: 1px solid rgb(87 230 255 / 0.5); border-radius: 50%; background: radial-gradient(circle at 35% 28%, rgb(244 247 245 / 0.32), rgb(87 230 255 / 0.08) 32%, rgb(5 7 13 / 0.82) 70%); color: var(--color-soft-white); font-family: var(--font-mono); font-size: clamp(1.1rem, 2.2vw, 1.7rem); box-shadow: inset 0 0 2rem rgb(87 230 255 / 0.15), 0 0 4rem rgb(87 230 255 / 0.2); }
+.hero-reactor__core i { position: absolute; inset: -25%; border: 1px solid rgb(87 230 255 / 0.13); border-radius: 50%; }
+.hero-reactor__satellite { display: inline-flex; position: absolute; align-items: center; gap: 0.45rem; padding: 0.38rem 0.62rem; border: 1px solid color-mix(in srgb, var(--reactor-color) 48%, transparent); border-radius: 999px; background: rgb(5 7 13 / 0.76); color: var(--color-soft-white); font-family: var(--font-mono); font-size: clamp(0.52rem, 0.8vw, 0.68rem); letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 0 0 2rem color-mix(in srgb, var(--reactor-color) 18%, transparent); backdrop-filter: blur(8px); }
+.hero-reactor__satellite i { width: 0.42rem; height: 0.42rem; border-radius: 50%; background: var(--reactor-color); box-shadow: 0 0 0.85rem var(--reactor-color); }
+.hero-reactor__satellite--1 { top: 7%; left: 42%; }
+.hero-reactor__satellite--2 { top: 47%; right: 0; }
+.hero-reactor__satellite--3 { bottom: 8%; left: 39%; }
+.hero-reactor__satellite--4 { top: 48%; left: 0; }
+.hero-reactor__telemetry { position: absolute; right: 12%; bottom: 23%; color: rgb(87 230 255 / 0.7); font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.18em; writing-mode: vertical-rl; }
 .constellation-node a { display: grid; position: relative; min-width: 9rem; min-height: 5.4rem; align-content: center; padding: 1rem; border: 1px solid var(--color-line); border-radius: 999px; background: rgb(5 7 13 / 0.86); text-decoration: none; box-shadow: 0 0 2.5rem rgb(87 230 255 / 0.05); }
 .constellation-node__orbit { position: absolute; inset: -0.45rem; border: 1px solid rgb(87 230 255 / 0.2); border-radius: inherit; }
 .constellation-node__name { font-weight: 800; }
@@ -68,3 +88,11 @@
 .writing-stream a:hover strong { color: var(--color-signal-cyan); }
 .shipping-status { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--color-verification-green); }
 .shipping-status i { width: 0.45rem; height: 0.45rem; border-radius: 50%; background: currentColor; box-shadow: 0 0 0.8rem currentColor; }
+@media (max-width: 800px) {
+  .arrival__reactor { --reactor-size: clamp(24rem, 78vw, 32rem); top: 4rem; right: clamp(-15rem, -22vw, -8rem); opacity: 0.72; }
+  .arrival__copy { text-shadow: 0 0.15rem 1.2rem var(--color-void), 0 0 2.5rem var(--color-void); }
+}
+@media (max-width: 460px) {
+  .arrival__reactor { top: 6rem; right: -15rem; opacity: 0.58; }
+  .hero-reactor__satellite { gap: 0; padding: 0.3rem; font-size: 0; }
+}

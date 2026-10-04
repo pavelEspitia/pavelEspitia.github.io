@@ -14,7 +14,7 @@ test('a failed Tier A module request downgrades once and preserves content', asy
   await page.route(/constellation-webgl(?:-[^/]+)?\.(?:js|ts)$/, (route) => route.abort());
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('data-capability-tier', 'tier-b');
-  await expect(page.locator('[data-constellation] a')).toHaveCount(5);
+  await expect(page.locator('[data-constellation] a')).toHaveCount(4);
   await expect(page.getByRole('heading', { name: 'Argus', exact: true })).toBeVisible();
 });
 

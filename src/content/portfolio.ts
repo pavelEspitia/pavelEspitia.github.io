@@ -77,15 +77,6 @@ export const siteContent: SiteContent = {
         { label: 'Unverified contracts', value: 'ABI reconstruction with whatsabi' },
       ],
     },
-    {
-      id: 'folio', name: 'Folio', eyebrow: 'Connected household system',
-      summary: 'A household operating system organized around the pay-to-pay cycle.',
-      problem: 'Budgets, menus, shopping lists, and actual purchases live in disconnected tools and lose the relationship between planning and spending.',
-      response: 'Folio connects today, finances, menu planning, and market runs in one multi-household product.',
-      differentiator: 'A menu becomes a shopping route; purchased items create real transactions that flow back into the budget.',
-      domains: ['Product systems', 'Fintech'], status: 'Private build',
-      visual: { primary: '#5BF0A5', secondary: '#FFF2D8', glow: '91 240 165' }, links: [],
-    },
   ],
   proof: [
     {
@@ -119,7 +110,7 @@ export const siteContent: SiteContent = {
     { id: 'ai-systems', title: 'AI systems that ship', description: 'Agentic products, local and hosted models, structured outputs, and interfaces that explain rather than obscure.', references: ['spectr-ai', 'argus', 'scry', 'ai-auditor'] },
     { id: 'security-engineering', title: 'Security engineering', description: 'Threat modeling, static analysis, pre-audit hardening, and security decisions placed inside the workflow.', references: ['argus', 'argus-lens', 'spectr-ai', 'signature-replay'] },
     { id: 'web3-infrastructure', title: 'Web3 infrastructure', description: 'Smart contracts, EIP-712 flows, wallet interactions, ABI reconstruction, and multi-chain systems.', references: ['scry', 'argus', 'solidity-vyper'] },
-    { id: 'product-architecture', title: 'Product architecture', description: 'Connected systems that turn complex rules into understandable, resilient product experiences.', references: ['folio', 'spectr-ai', 'argus-lens'] },
+    { id: 'product-architecture', title: 'Product architecture', description: 'Connected systems that turn complex rules into understandable, resilient product experiences.', references: ['spectr-ai', 'argus-lens', 'scry'] },
   ],
   writing: writingEntries,
   about: {

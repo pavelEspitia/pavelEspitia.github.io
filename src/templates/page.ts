@@ -4,6 +4,7 @@ import { escapeHtml, renderLink, renderProduct } from './product.ts';
 export function renderHomePage(content: SiteContent): string {
   const productNames = new Map(content.products.map(({ id, name }) => [id, name]));
   const writingNames = new Map(content.writing.map(({ id, title }) => [id, title]));
+  const productCount = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five'][content.products.length] ?? String(content.products.length);
   return `
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="site-atmosphere" aria-hidden="true"><div class="aurora"></div><div class="grain"></div></div>
@@ -16,10 +17,17 @@ export function renderHomePage(content: SiteContent): string {
   </header>
   <main id="main" tabindex="-1">
     <section class="arrival" id="universe" aria-labelledby="universe-title">
-      <div class="arrival__signal" aria-hidden="true"><span></span><span></span><span></span></div>
-      <p class="eyebrow">Independent product engineer · Medellín</p><h1 id="universe-title">${escapeHtml(content.person.positioning)}</h1><p class="arrival__intro">${escapeHtml(content.person.introduction)}</p>
-      <div class="arrival__actions"><a class="button button--primary" href="#products">Explore the product universe</a><a class="button button--quiet" href="#contact">Contact Pavel</a></div>
-      <div class="constellation-shell" aria-labelledby="constellation-title"><div class="constellation-heading"><p class="eyebrow">Live system map</p><h2 id="constellation-title">Five products. One connected practice.</h2></div>
+      <div class="arrival__reactor" data-hero-reactor aria-hidden="true">
+        <div class="hero-reactor__scan"></div><div class="hero-reactor__ring hero-reactor__ring--outer"></div><div class="hero-reactor__ring hero-reactor__ring--inner"></div>
+        <div class="hero-reactor__core"><span>P</span><i></i></div>
+        ${content.products.map((product, index) => `<span class="hero-reactor__satellite hero-reactor__satellite--${index + 1}" style="--reactor-color:${escapeHtml(product.visual.primary)}"><i></i>${escapeHtml(product.name)}</span>`).join('')}
+        <span class="hero-reactor__telemetry">AI / SECURITY / WEB3</span>
+      </div>
+      <div class="arrival__copy"><div class="arrival__signal" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="eyebrow">Independent product engineer · Medellín</p><h1 id="universe-title">${escapeHtml(content.person.positioning)}</h1><p class="arrival__intro">${escapeHtml(content.person.introduction)}</p>
+        <div class="arrival__actions"><a class="button button--primary" href="#products">Explore the product universe</a><a class="button button--quiet" href="#contact">Contact Pavel</a></div>
+      </div>
+      <div class="constellation-shell" aria-labelledby="constellation-title"><div class="constellation-heading"><p class="eyebrow">Live system map</p><h2 id="constellation-title">${productCount} products. One connected practice.</h2></div>
         <ol class="constellation" data-constellation>${content.products.map((product, index) => `<li class="constellation-node constellation-node--${index + 1}" data-product="${escapeHtml(product.id)}"><a href="#product-${escapeHtml(product.id)}" aria-label="Explore ${escapeHtml(product.name)}"><span class="constellation-node__orbit" aria-hidden="true"></span><span class="constellation-node__name">${escapeHtml(product.name)}</span><span class="constellation-node__domain">${escapeHtml(product.domains.join(' · '))}</span></a></li>`).join('')}</ol>
       </div>
     </section>

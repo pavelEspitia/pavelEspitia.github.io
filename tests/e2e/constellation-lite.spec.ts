@@ -9,10 +9,25 @@ test('tier B preserves semantic controls while adding a decorative canvas', asyn
   await expect(page.locator('html')).toHaveAttribute('data-capability-tier', 'tier-b');
   await expect(page.locator('[data-constellation-canvas]')).toHaveAttribute('aria-hidden', 'true');
   const controls = page.locator('[data-constellation] a');
-  await expect(controls).toHaveCount(5);
+  await expect(controls).toHaveCount(4);
   await controls.first().focus();
   await expect(controls.first()).toBeFocused();
   await expect(controls.first().locator('.constellation-node__domain')).toBeVisible();
+});
+
+test('the arrival view presents visible continuous motion when motion is enabled', async ({ page }) => {
+  await page.setViewportSize({ width: 661, height: 675 });
+  await page.goto('/');
+
+  const reactor = page.locator('[data-hero-reactor]');
+  await expect(reactor).toBeInViewport();
+  await expect(reactor).toBeVisible();
+  const ringAnimation = await reactor.locator('.hero-reactor__ring').first().evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { name: style.animationName, duration: style.animationDuration };
+  });
+  expect(ringAnimation.name).not.toBe('none');
+  expect(ringAnimation.duration).not.toBe('0s');
 });
 
 test('resize keeps every product control inside the constellation', async ({ page }) => {

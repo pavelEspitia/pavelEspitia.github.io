@@ -26,11 +26,20 @@ describe('semantic portfolio page', () => {
   test('renders_all_products_and_story_evidence_controls', () => {
     const html = renderHomePage(siteContent);
 
-    for (const id of ['spectr-ai', 'argus', 'argus-lens', 'scry', 'folio']) {
+    for (const id of ['spectr-ai', 'argus', 'argus-lens', 'scry']) {
       expect(html).toContain(`data-product="${id}"`);
     }
+    expect(html).not.toContain('data-product="folio"');
+    expect(html.match(/class="product-world"/g)).toHaveLength(4);
     expect(html).toContain('data-presentation-mode="story"');
     expect(html).toContain('data-presentation-mode="evidence"');
+  });
+
+  test('puts_an_animated_reactor_in_the_arrival_view', () => {
+    const html = renderHomePage(siteContent);
+
+    expect(html).toContain('data-hero-reactor');
+    expect(html).toContain('Four products. One connected practice.');
   });
 
   test('renders_accessible_fallback_destinations', () => {

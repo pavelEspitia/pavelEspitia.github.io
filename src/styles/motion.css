@@ -1,9 +1,29 @@
 @keyframes signal-pulse { 0%, 100% { opacity: 0.45; transform: scaleX(0.8); } 50% { opacity: 1; transform: scaleX(1); } }
 @keyframes aurora-drift { from { transform: translate3d(-4%, -2%, 0) rotate(-8deg); } to { transform: translate3d(5%, 4%, 0) rotate(-2deg); } }
+@keyframes reactor-spin { to { transform: rotate(360deg); } }
+@keyframes reactor-spin-reverse { to { transform: rotate(-360deg); } }
+@keyframes reactor-breathe { 0%, 100% { transform: scale(0.92); filter: brightness(0.82); } 50% { transform: scale(1.08); filter: brightness(1.24); } }
+@keyframes reactor-float { 0%, 100% { transform: translate3d(0, -0.28rem, 0); } 50% { transform: translate3d(0, 0.32rem, 0); } }
+@keyframes orbit-ripple { 0% { opacity: 0.24; transform: scale(0.96); } 55% { opacity: 0.66; } 100% { opacity: 0.08; transform: scale(1.09); } }
+@keyframes product-signal { 0%, 100% { box-shadow: 0 0 0 rgb(87 230 255 / 0); } 50% { box-shadow: 0 0 2rem rgb(87 230 255 / 0.14); } }
 .arrival__signal span { animation: signal-pulse 2.8s var(--ease-out) infinite; transform-origin: left; }
 .arrival__signal span:nth-child(2) { animation-delay: 180ms; }
 .arrival__signal span:nth-child(3) { animation-delay: 360ms; }
 .aurora { animation: aurora-drift 16s ease-in-out infinite alternate; }
+.hero-reactor__scan { animation: reactor-spin 8s linear infinite; }
+.hero-reactor__ring--outer { animation: reactor-spin 22s linear infinite; }
+.hero-reactor__ring--inner { animation: reactor-spin-reverse 13s linear infinite; }
+.hero-reactor__core { animation: reactor-breathe 3.2s ease-in-out infinite; }
+.hero-reactor__core i { animation: orbit-ripple 2.4s ease-out infinite; }
+.hero-reactor__satellite { animation: reactor-float 3.8s ease-in-out infinite; }
+.hero-reactor__satellite--2 { animation-delay: -0.9s; }
+.hero-reactor__satellite--3 { animation-delay: -1.8s; }
+.hero-reactor__satellite--4 { animation-delay: -2.7s; }
+.constellation-node__orbit { animation: orbit-ripple 3.4s ease-out infinite; }
+.constellation-node:nth-child(2) .constellation-node__orbit { animation-delay: -0.8s; }
+.constellation-node:nth-child(3) .constellation-node__orbit { animation-delay: -1.6s; }
+.constellation-node:nth-child(4) .constellation-node__orbit { animation-delay: -2.4s; }
+.product-world { animation: product-signal 5s ease-in-out infinite; }
 .constellation-node a, .button, .proof-links a, .product-links a, .contact-links a { transition: transform 280ms var(--ease-out), border-color 180ms ease, background-color 180ms ease, box-shadow 280ms ease; }
 .constellation-node a:hover, .constellation-node a:focus-visible { transform: translateY(-0.3rem) scale(1.025); border-color: var(--color-signal-cyan); box-shadow: 0 1rem 4rem rgb(87 230 255 / 0.13); }
 .constellation-shell[data-focus-product] canvas { filter: drop-shadow(0 0 0.8rem rgb(87 230 255 / 0.28)); }
@@ -12,5 +32,5 @@
 html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-motion="reduced"] *::after { scroll-behavior: auto !important; animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
-  .aurora, .arrival__signal span { animation: none; }
+  .aurora, .arrival__signal span, .hero-reactor__scan, .hero-reactor__ring, .hero-reactor__core, .hero-reactor__core i, .hero-reactor__satellite, .constellation-node__orbit, .product-world { animation: none; }
 }
